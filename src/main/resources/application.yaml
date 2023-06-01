@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /app
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:54320/pg
+    username: postgres
+    password: dummy
+    hikari:
+      max-connections: 2
+  sql:
+    init:
+      mode: always
