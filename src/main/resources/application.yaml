@@ -1,0 +1,7 @@
+# application.yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://${db.server:localhost}:${db.port:54320}/products
+    username: products_user
+    password: dummy
+
