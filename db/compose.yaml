@@ -1,0 +1,9 @@
+services:
+  east:
+    image: postgres:14.6
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_DB: east
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "dummy"

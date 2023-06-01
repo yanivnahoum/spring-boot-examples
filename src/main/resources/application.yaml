@@ -1,2 +1,12 @@
+server:
+  servlet:
+    context-path: /app
 
-
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:54320/east
+    username: postgres
+    password: dummy
+  sql:
+    init:
+      mode: always
