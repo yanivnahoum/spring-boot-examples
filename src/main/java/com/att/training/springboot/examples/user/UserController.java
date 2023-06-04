@@ -24,7 +24,6 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    @DbContext
     public void create(@Valid @RequestBody User user) {
         userService.create(user);
     }
