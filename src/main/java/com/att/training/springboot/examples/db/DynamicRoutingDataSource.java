@@ -1,6 +1,5 @@
 package com.att.training.springboot.examples.db;
 
-import com.att.training.springboot.examples.db.DbContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

@@ -1,7 +1,5 @@
 package com.att.training.springboot.examples.user;
 
-import com.att.training.springboot.examples.db.DbRegion;
-import com.att.training.springboot.examples.db.context.DbContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
