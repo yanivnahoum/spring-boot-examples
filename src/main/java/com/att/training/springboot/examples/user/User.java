@@ -1,4 +1,4 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.user;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;

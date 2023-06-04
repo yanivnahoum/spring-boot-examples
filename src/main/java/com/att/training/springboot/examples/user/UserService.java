@@ -1,4 +1,4 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

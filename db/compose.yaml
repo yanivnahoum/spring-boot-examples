@@ -6,4 +6,13 @@ services:
     environment:
       POSTGRES_DB: east
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "dummy"
+      POSTGRES_PASSWORD: "east"
+
+  west:
+    image: postgres:14.6
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_DB: west
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "west"

@@ -2,11 +2,15 @@ server:
   servlet:
     context-path: /app
 
-spring:
+app:
   datasource:
-    url: jdbc:postgresql://localhost:54320/east
-    username: postgres
-    password: dummy
-  sql:
-    init:
-      mode: always
+    east:
+      url: jdbc:postgresql://localhost:54320/east
+      username: postgres
+      password: east
+      hikari:
+        max-connections: 10
+    west:
+      url: jdbc:postgresql://localhost:54321/west
+      username: postgres
+      password: west

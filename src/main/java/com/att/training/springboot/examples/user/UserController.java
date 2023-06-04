@@ -1,9 +1,9 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.user;
 
+import com.att.training.springboot.examples.db.DbContext;
+import com.att.training.springboot.examples.db.DbRegion;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +17,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -24,7 +25,9 @@ public class UserController {
     @PostMapping
     @ResponseStatus(CREATED)
     public void create(@Valid @RequestBody User user) {
+        var dbRegion = DbRegion.fromId(user.id());
+        log.info("#create - user = {}, dbRegion = {}", user, dbRegion);
+        DbContext.setRegion(dbRegion);
         userService.create(user);
     }
 }
-
