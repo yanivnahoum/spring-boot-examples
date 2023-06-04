@@ -10,4 +10,8 @@ public class DbContext {
     public static void setRegion(DbRegion dbRegion) {
         region.set(dbRegion);
     }
+
+    public static void clear() {
+        region.remove();
+    }
 }
