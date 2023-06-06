@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <omitEmptyFields>true</omitEmptyFields>
+                    <pattern>
+                        {
+                        "timestamp": "%date",
+                        "level": "%level",
+                        "class": "%logger",
+                        "thread": "%thread",
+                        "message": "%message",
+                        "stackTrace": "%throwable",
+                        "app": "users",
+                        "additionalInfo": "%kvp"
+                        }
+                    </pattern>
+                </pattern>
+                <mdc>
+                    <fieldName>additionalInfo</fieldName>
+                </mdc>
+                <!--                <nestedField>-->
+                <!--                    <fieldName>additionalInfo</fieldName>-->
+                <!--                    <providers>-->
+                <!--                    </providers>-->
+                <!--                </nestedField>-->
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

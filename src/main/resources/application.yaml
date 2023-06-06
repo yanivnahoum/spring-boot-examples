@@ -1,2 +1,9 @@
+server:
+  servlet:
+    context-path: /app
 
-
+org:
+  springframework:
+    boot:
+      logging:
+        LoggingSystem: none
