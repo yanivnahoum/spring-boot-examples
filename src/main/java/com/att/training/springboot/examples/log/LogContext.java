@@ -11,10 +11,6 @@ public final class LogContext {
         // Instantiation from outside the class is not allowed
     }
 
-    public static LogContext configure() {
-        return new LogContext();
-    }
-
     public static void setCorrelationId(UUID correlationId) {
         MDC.put("correlationId", correlationId.toString());
     }
@@ -22,7 +18,6 @@ public final class LogContext {
     public static void setOperationName(String operationName) {
         MDC.put("operationName", operationName);
     }
-
 
     public static void clear() {
         MDC.clear();

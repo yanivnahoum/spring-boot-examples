@@ -1,4 +1,4 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.config;
 
 import com.att.training.springboot.examples.log.MdcHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;

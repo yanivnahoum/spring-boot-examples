@@ -8,8 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 public class SpringBootExamplesApplication {
 	public static void main(String[] args) {
-		System.setProperty("org.springframework.boot.logging.LoggingSystem", "none");
 		SpringApplication.run(SpringBootExamplesApplication.class, args);
 	}
-
 }

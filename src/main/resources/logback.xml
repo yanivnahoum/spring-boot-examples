@@ -14,19 +14,24 @@
                         "thread": "%thread",
                         "message": "%message",
                         "stackTrace": "%throwable",
-                        "app": "users",
-                        "additionalInfo": "%kvp"
+                        "app": "users"
                         }
                     </pattern>
                 </pattern>
-                <mdc>
+                <!--                <arguments>-->
+                <!--                    <fieldName>args</fieldName>-->
+                <!--                </arguments>-->
+                <!--                <mdc>-->
+                <!--                    <fieldName>mdc</fieldName>-->
+                <!--                </mdc>-->
+                <nestedField>
                     <fieldName>additionalInfo</fieldName>
-                </mdc>
-                <!--                <nestedField>-->
-                <!--                    <fieldName>additionalInfo</fieldName>-->
-                <!--                    <providers>-->
-                <!--                    </providers>-->
-                <!--                </nestedField>-->
+                    <providers>
+                        <arguments/>
+                        <logstashMarkers/>
+                        <mdc/>
+                    </providers>
+                </nestedField>
             </providers>
         </encoder>
     </appender>
