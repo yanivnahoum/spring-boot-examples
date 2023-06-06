@@ -39,6 +39,8 @@ public class UserController {
         );
         log.info("#getById - Found user!", entries(args));
         log.info("#getById - Found user!", defer(() -> entries(args)));
+        // Send a POJO as a value:
+        log.info("#getById - Found user!", kv("user", user));
         // This is only possible with StructuredArguments
         log.info("#getById - Found user with {}, {}", kv("userId", user.id()), kv("username", user.name()));
 
@@ -48,6 +50,8 @@ public class UserController {
                 "#getById - Found user!");
         log.info(appendEntries(args), "#getById - Found user!");
         log.info(Markers.defer(() -> appendEntries(args)), "#getById - Found user!");
+        // Send a POJO as a value:
+        log.info(append("user", user), "#getById - Found user!");
         return user;
     }
 }
