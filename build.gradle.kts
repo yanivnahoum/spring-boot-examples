@@ -7,7 +7,6 @@ plugins {
 
 group = "com.att.training"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {
@@ -22,11 +21,24 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks {
+    withType<JavaCompile>().configureEach {
+        with(options) {
+            release.set(17)
+            compilerArgs.add("-Xlint:all,-processing,-auxiliaryclass")
+        }
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+            showStandardStreams = true
+        }
+    }
 }
