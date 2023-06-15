@@ -1,6 +1,6 @@
 package com.att.training.springboot.examples.user;
 
-import lombok.experimental.StandardException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -13,9 +13,11 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
-@Repository
 @Slf4j
+@Repository
+@RequiredArgsConstructor
 public class UserRepository {
+    private final UserDao userDao;
     private static final List<User> users = List.of(
             new User(1, "Alice"),
             new User(2, "Bob"),
@@ -26,12 +28,12 @@ public class UserRepository {
 
     @NonNull
     public User findById(int id) {
-        var user = idToUser.get(id);
-        if (user != null) {
-            log.info("#findById - Found {}", user);
-            return user;
+        var user = userDao.findById(id);
+        if (user == null) {
+            throw new UserNotFoundException(id);
         }
-        throw new UserNotFoundException(id);
+        log.info("#findById - Found {}", user);
+        return user;
     }
 
     @Nullable
@@ -49,15 +51,7 @@ public class UserRepository {
         try {
             return Success.of(findById(id));
         } catch (Exception ex) {
-//            log.warn("error", ex);
-            throw new InvalidUserException("Id is greater than 100", ex);
             return Failure.of(ex);
         }
     }
-}
-
-@StandardException
-class InvalidUserException extends RuntimeException {
-
-
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,9 +20,9 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @GetMapping("{id}")
-    UserPair getPairById(@PathVariable int id) {
-        return userService.getPairById(id, id + 1);
+    @GetMapping
+    UserPair getPairById(@RequestParam int id1, @RequestParam int id2) {
+        return userService.getPairById(id1, id2);
     }
 }
 

@@ -49,7 +49,7 @@ public class UserService {
         return UserPair.empty();
     }
 
-    public UserPair getPairByIdWithSuccessOrFailure2(int id1, int id2) {
+    public UserPair getPairByIdWithSuccessOrFailureInverted(int id1, int id2) {
         var result1 = userRepository.tryFindById(id1);
         if (result1.isError()) {
             return UserPair.empty();
