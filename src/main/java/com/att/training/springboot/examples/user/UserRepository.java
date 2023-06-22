@@ -6,25 +6,13 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Repository
 @RequiredArgsConstructor
 public class UserRepository {
     private final UserDao userDao;
-    private static final List<User> users = List.of(
-            new User(1, "Alice"),
-            new User(2, "Bob"),
-            new User(3, "Carl")
-    );
-    private static final Map<Integer, User> idToUser = users.stream()
-            .collect(toMap(User::id, Function.identity()));
 
     @NonNull
     public User findById(int id) {
@@ -38,12 +26,12 @@ public class UserRepository {
 
     @Nullable
     public User findByIdOrNull(int id) {
-        return idToUser.get(id);
+        return userDao.findById(id);
     }
 
     @NonNull
     public Optional<User> optionallyFindById(int id) {
-        return Optional.ofNullable(idToUser.get(id));
+        return Optional.ofNullable(userDao.findById(id));
     }
 
     @NonNull

@@ -15,7 +15,7 @@ public class UserDao {
 
     public User findById(int id) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM users WHERE id = ?", new UserRowMapper(), id);
+            return jdbcTemplate.queryForObject("SELECT * FROM users WHERE id = ?", userRowMapper, id);
         } catch (EmptyResultDataAccessException e) {
             log.info("#findById - Could not find user with id={} in db", id);
             return null;
