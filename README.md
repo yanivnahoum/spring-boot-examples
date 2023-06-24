@@ -7,3 +7,5 @@ different concern.
 
 * abstract-datasource: dynamic routing of multiple datasources
 * structured-logging: structured logging using logback and a json encoder
+* error-handling: comparing various error handling patterns
+* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
