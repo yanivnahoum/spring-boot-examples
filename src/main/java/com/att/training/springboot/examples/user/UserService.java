@@ -11,7 +11,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getById(int id) {
-        log.info("#getById - Attempting to fetch from repo user {}", id);
+        log.debug("#getById - Attempting to fetch from repo user {}", id);
         return userRepository.findById(id);
     }
 }

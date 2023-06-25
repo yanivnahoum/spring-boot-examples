@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <if condition='isDefined("KUBERNETES_SERVICE_HOST")'>
+            <then>
+                <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                    <providers>
+                        <pattern>
+                            <omitEmptyFields>true</omitEmptyFields>
+                            <pattern>
+                                {
+                                "timestamp": "%date",
+                                "level": "%level",
+                                "class": "%logger",
+                                "thread": "%thread",
+                                "message": "%message",
+                                "stackTrace": "%throwable",
+                                "app": "users"
+                                }
+                            </pattern>
+                        </pattern>
+                        <!--                <arguments>-->
+                        <!--                    <fieldName>args</fieldName>-->
+                        <!--                </arguments>-->
+                        <!--                <mdc>-->
+                        <!--                    <fieldName>mdc</fieldName>-->
+                        <!--                </mdc>-->
+                        <nestedField>
+                            <fieldName>additionalInfo</fieldName>
+                            <providers>
+                                <arguments/>
+                                <logstashMarkers/>
+                                <mdc/>
+                            </providers>
+                        </nestedField>
+                    </providers>
+                </encoder>
+            </then>
+            <else>
+                <encoder>
+                    <pattern>%clr(%d){faint} %clr(${appName:-app}){yellow} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{30}){cyan} %msg%n</pattern>
+                </encoder>
+            </else>
+        </if>
+    </appender>
+</included>
