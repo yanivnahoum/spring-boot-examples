@@ -1,8 +1,7 @@
 package com.att.training.springboot.examples.inheritance;
 
-import lombok.RequiredArgsConstructor;
-
 abstract class BaseCar {
+    // internal state
     public abstract void start();
 
     public abstract void stop();
@@ -14,7 +13,6 @@ abstract class BaseCar {
     abstract void energize();
 }
 
-@RequiredArgsConstructor
 class ElectricCar extends BaseCar {
 
     @Override
@@ -33,7 +31,6 @@ class ElectricCar extends BaseCar {
     }
 }
 
-@RequiredArgsConstructor
 class GasolineCar extends BaseCar {
 
     @Override
