@@ -11,6 +11,7 @@
     </appender>
 
     <logger name="com.azure.spring.cloud" level="trace"/>
+    <logger name="com.azure.data.appconfiguration" level="trace"/>
 
     <root level="info">
         <appender-ref ref="stdout"/>
