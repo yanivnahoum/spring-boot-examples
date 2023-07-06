@@ -1,0 +1,7 @@
+app:
+  greeting:
+    message: Hello World!
+    times: 3
+  welcome:
+    message: Welcome!
+    times: 2
