@@ -9,3 +9,5 @@ different concern.
 * structured-logging: structured logging using logback and a json encoder
 * error-handling: comparing various error handling patterns
 * composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
+* feature-management: using Azure App Configuration to manage feature flags
+* spring-libs: creating and consuming Spring libraries
