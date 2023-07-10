@@ -1,9 +1,7 @@
 package com.att.training.lib2;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class Welcomer {
     private final WelcomeProperties welcomeProperties;
