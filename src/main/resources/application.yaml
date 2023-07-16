@@ -9,6 +9,6 @@ spring:
     password: dummy
     hikari:
       max-connections: 2
-  sql:
-    init:
-      mode: always
+  output:
+    ansi:
+      enabled: always
