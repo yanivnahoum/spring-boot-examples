@@ -1,13 +1,8 @@
-## Spring Boot Examples
+## Spring Boot Properties
 
-This repo contains multiple branches, each an isolated Spring Boot app demonstrating the use or implementation of a
-different concern.
-
-**Branches**:
-
-* abstract-datasource: dynamic routing of multiple datasources
-* structured-logging: structured logging using logback and a json encoder
-* error-handling: comparing various error handling patterns
-* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
-* feature-management: using Azure App Configuration to manage feature flags
-* spring-libs: creating and consuming Spring libraries
+This repo shows how to map configuration properties via spring's property sources:
+1. application.yaml
+2. Program arguments: `java -jar target/spring-boot-examples-0.0.1-SNAPSHOT.jar --app.order-client.response-timeout=20s`
+3. System properties: `java -Dapp.order-client.response-timeout=60s -jar target/spring-boot-examples-0.0.1-SNAPSHOT.jar`
+4. Environment variables: `APP_ORDER_CLIENT_BASE_URL=http://abc.com java -jar target/spring-boot-examples-0.0.1-SNAPSHOT.jar`
+5. Config trees 
