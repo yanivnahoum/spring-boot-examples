@@ -11,3 +11,4 @@ different concern.
 * composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
 * feature-management: using Azure App Configuration to manage feature flags
 * spring-libs: creating and consuming Spring libraries
+* spring-properties: defining and using Spring Boot properties
