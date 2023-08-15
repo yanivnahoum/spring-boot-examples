@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-        <if condition='isDefined("KUBERNETES_SERVICE_HOST")'>
-            <then>
+    <if condition='isDefined("KUBERNETES_SERVICE_HOST")'>
+        <then>
+            <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
                     <providers>
                         <pattern>
@@ -12,11 +12,11 @@
                                 {
                                 "timestamp": "%date",
                                 "level": "%level",
-                                "class": "%logger",
                                 "thread": "%thread",
+                                "app": "${appName:-app}"
+                                "class": "%logger",
                                 "message": "%message",
                                 "stackTrace": "%throwable",
-                                "app": "users"
                                 }
                             </pattern>
                         </pattern>
@@ -36,12 +36,14 @@
                         </nestedField>
                     </providers>
                 </encoder>
-            </then>
-            <else>
+            </appender>
+        </then>
+        <else>
+            <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder>
-                    <pattern>%clr(%d){faint} %clr(${appName:-app}){yellow} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{30}){cyan} %msg%n</pattern>
+                    <pattern>%clr(%d){faint} %clr(${appName:-app}){yellow} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{50}){cyan} %msg%n</pattern>
                 </encoder>
-            </else>
-        </if>
-    </appender>
+            </appender>
+        </else>
+    </if>
 </included>
