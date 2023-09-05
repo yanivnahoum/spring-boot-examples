@@ -1,11 +1,13 @@
-## Spring Boot Examples
+## Azure Feature Management
 
-This repo contains multiple branches, each an isolated Spring Boot app demonstrating the use or implementation of a
-different concern.
+The following properties have to be set (via program args, system properties, env vars, etc.):
+* azure.appconfig.enabled=true
+* azure.appconfig.connection-string=<connection-string-from-azure-portal>
 
-**Branches**:
-
-* abstract-datasource: dynamic routing of multiple datasources
-* structured-logging: structured logging using logback and a json encoder
-* error-handling: comparing various error handling patterns
-* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
+To test if a feature is enabled, send an http request to `http://localhost:8080/features/check/<feature-name>`.
+<br>
+Example using httpie:
+```
+http :8080/features/check/feature1
+http :8080/features/check/feature2
+```

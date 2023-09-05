@@ -4,8 +4,7 @@
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{20}){cyan} %msg
-                %clr(%mdc){blue}%n
+            <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{20}){cyan} %msg %clr(%mdc){blue}%n
             </pattern>
         </encoder>
     </appender>
