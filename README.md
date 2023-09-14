@@ -22,3 +22,10 @@ See the [data file](src/main/resources/data.sql) for the initial data.
    result in an exception and the transaction will be **rolled back**.
 7. When you're done, run the following from the [db](db) directory: `docker compose down`
 
+For parallel execution of queries, via a decorated TaskExecutor that propagates the `DbContext`, clean the db by
+restarting the app and then:
+
+1. Make an HTTP request to insert a record into the **east** db: `http :8080/app/users/async id=10 name=Alice`
+2. Make an HTTP request to insert a record into the **west** db: `http :8080/app/users/async id=110 name=Bob`
+3. Make an HTTP request to insert a record into the **default** (east) db: `http :8080/app/users id=210 name=Carl`
+

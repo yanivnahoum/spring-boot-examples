@@ -21,26 +21,35 @@ public class TransactionWithDbContextAspect {
     void inApp() {}
 
     @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
-    void annotatedMethod() {}
+    void transactionalMethod() {}
+
+    @Pointcut("@annotation(com.att.training.springboot.examples.db.context.WithDbContext)")
+    void withDbContextMethod() {}
 
     @Pointcut("args(user,..)")
     void hasUserArg(User user) {}
 
-    @Around("inApp() && annotatedMethod() && hasUserArg(user)")
-    public Object adviseAnnotatedMethods(ProceedingJoinPoint joinPoint, User user) {
+    @Around("inApp() && transactionalMethod() && hasUserArg(user)")
+    public Object adviseTransactionalMethod(ProceedingJoinPoint joinPoint, User user) {
+        return setDbContext(joinPoint, user);
+    }
+
+    @Around("inApp() && withDbContextMethod() && hasUserArg(user)")
+    public Object adviseDbContextMethod(ProceedingJoinPoint joinPoint, User user) {
         return setDbContext(joinPoint, user);
     }
 
     @SneakyThrows
     private Object setDbContext(ProceedingJoinPoint joinPoint, User user) {
         var dbRegion = DbRegion.fromId(user.id());
-        log.info("#{} - user = {}, dbRegion = {}", joinPoint.getSignature().toShortString(), user, dbRegion);
+        var methodSignature = joinPoint.getSignature().toShortString();
+        log.info("#{} - user = {}, dbRegion = {}", methodSignature, user, dbRegion);
         DbContext.setRegion(dbRegion);
         try {
             return joinPoint.proceed();
         } finally {
             DbContext.clear();
-            log.info("#{} - cleared db context");
+            log.info("#{} - cleared db context", methodSignature);
         }
     }
 }
