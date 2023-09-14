@@ -23,8 +23,11 @@ public class FeatureController {
 
     @GetMapping("check/{feature}")
     Mono<Boolean> isFeatureEnabled(@PathVariable String feature) {
-        log.info("#isFeatureEnabled - all features: {}", featureManager.getAllFeatureNames());
-        return featureManager.isEnabledAsync(feature);
+        return Mono.deferContextual(ctx -> {
+            log.info("[{}] #isFeatureEnabled - checking if feature {} is enabled",
+                    ctx.get(CorrelationWebFilter.CORRELATION_ID_KEY), feature);
+            return featureManager.isEnabledAsync(feature);
+        });
     }
 
     @GetMapping

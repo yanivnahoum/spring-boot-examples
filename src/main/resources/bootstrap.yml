@@ -4,10 +4,10 @@ spring:
       appconfiguration:
         enabled: ${azure.appconfig.enabled:false}
         stores:
-          - connection-string: ${azure.appconfig.connection-string}
-            feature-flags:
-              enabled: true
-              selects:
-                - label-filter: ',${spring.profiles.active}'
-            monitoring:
-              feature-flag-refresh-interval: 10s
+        - connection-string: ${azure.appconfig.connection-string}
+          feature-flags:
+            enabled: true
+            selects:
+            - label-filter: ',${spring.profiles.active}'
+          monitoring:
+            feature-flag-refresh-interval: 10s
