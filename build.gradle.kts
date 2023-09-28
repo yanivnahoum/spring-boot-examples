@@ -1,8 +1,8 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.1.2"
-    id("io.spring.dependency-management") version "1.1.0"
-    id("io.freefair.lombok") version "8.1.0"
+    id("org.springframework.boot") version "3.1.4"
+    id("io.spring.dependency-management") version "1.1.3"
+    id("io.freefair.lombok") version "8.3"
 }
 
 group = "com.att.training"
@@ -18,7 +18,7 @@ repositories {
     mavenCentral()
 }
 
-extra["snakeyaml.version"] = "2.0"
+extra["snakeyaml.version"] = "2.2"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
