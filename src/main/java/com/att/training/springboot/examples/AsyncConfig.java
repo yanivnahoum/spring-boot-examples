@@ -15,12 +15,14 @@ public class AsyncConfig {
                 .corePoolSize(threadPoolSize)
                 .maxPoolSize(threadPoolSize)
                 .threadNamePrefix("io-pool-")
-                .taskDecorator(this::propagateLogContext)
+                // Uncomment this to decorate all runnables and propagate the log context
+//                .taskDecorator(this::propagateLogContext)
                 .build();
 
         taskExecutor.setDaemon(true);
         return taskExecutor;
     }
+
 
     private Runnable propagateLogContext(Runnable runnable) {
         var correlationId = LogContext.getCorrelationId();

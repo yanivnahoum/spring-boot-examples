@@ -25,6 +25,9 @@ public class SomeService {
 
     void async() {
         try (var ignored = LogContext.putClosableCorrelationId()) {
+            log.info("#async");
+            // We can wrap out runnables with a ContextRunnable:
+//            var task1 = CompletableFuture.runAsync(new ContextRunnable(() -> sleepAndLog(Duration.ofSeconds(2))), ioTaskExecutor);
             var task1 = CompletableFuture.runAsync(() -> sleepAndLog(Duration.ofSeconds(2)), ioTaskExecutor);
             var task2 = CompletableFuture.runAsync(() -> sleepAndLog(Duration.ofSeconds(1)), ioTaskExecutor);
             CompletableFuture.allOf(task1, task2).join();
@@ -38,3 +41,4 @@ public class SomeService {
         log.info("#sleepAndLog - done sleeping!");
     }
 }
+
