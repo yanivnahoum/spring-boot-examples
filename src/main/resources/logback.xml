@@ -7,8 +7,10 @@
         </encoder>
     </appender>
 
-    <logger name="com.zaxxer.hikari.HikariConfig" level="warn"/>
+    <logger name="com.zaxxer.hikari" level="debug"/>
     <logger name="org.springframework.jdbc.support.JdbcTransactionManager" level="debug"/>
+    <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="debug"/>
+
 
     <root level="info">
         <appender-ref ref="stdout"/>
