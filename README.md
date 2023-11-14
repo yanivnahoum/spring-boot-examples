@@ -13,3 +13,4 @@ different concern.
 * spring-libs: creating and consuming Spring libraries
 * spring-properties: defining and using Spring Boot properties
 * context-propagation: propagating thread-local context to async executions in Spring MVC
+* spring-converters: creating and using Spring converters
