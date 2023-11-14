@@ -1,15 +1,12 @@
-## Spring Boot Examples
+## Spring Boot Converters
 
-This repo contains multiple branches, each an isolated Spring Boot app demonstrating the use or implementation of a
-different concern.
+Usually we deal with deserializing the body of http requests from json to a POJO using `@RequestBody` and Jackson.
+But when dealing with query params annotated with `@RequestParam`, we need to convert the String values to the desired type.
+Basic conversion from String to number types, Enums, and DateTime types are supported out of the box.
+But what if we want to convert to a custom type? This is where Spring Boot Converters come in handy.
 
-**Branches**:
-
-* abstract-datasource: dynamic routing of multiple datasources
-* structured-logging: structured logging using logback and a json encoder
-* error-handling: comparing various error handling patterns
-* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
-* feature-management: using Azure App Configuration to manage feature flags
-* spring-libs: creating and consuming Spring libraries
-* spring-properties: defining and using Spring Boot properties
-* context-propagation: propagating thread-local context to async executions in Spring MVC
+### How to use
+Had we wanted the default enum conversion, this would work:
+`http ':8080/demo/api?color=RED'`
+But our api required the color to be lowercase, so we created a custom converter to convert the String to a `Color` object:
+Run `http ':8080/demo/api?color=red'` to see the color being converted to a `Color` object.
