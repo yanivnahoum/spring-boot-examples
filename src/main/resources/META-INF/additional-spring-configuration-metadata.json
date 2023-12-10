@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.task.execution.io-pool.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use a separate thread pool for IO bound tasks."
+    }
+  ]
+}
