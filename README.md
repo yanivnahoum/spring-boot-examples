@@ -14,4 +14,4 @@ different concern.
 * spring-properties: defining and using Spring Boot properties
 * context-propagation: propagating thread-local context to async executions in Spring MVC
 * spring-converters: creating and using Spring converters
-* spring-threading: Parallelizing tasks using Spring's TaskExecutor, Async and CompleteableFutures
+* spring-threading: Parallelizing tasks using Spring's TaskExecutor, Async and CompletableFutures
