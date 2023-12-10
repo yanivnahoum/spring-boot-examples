@@ -1,16 +1,8 @@
-## Spring Boot Examples
+## Parallelizing tasks in Spring Boot
 
-This repo contains multiple branches, each an isolated Spring Boot app demonstrating the use or implementation of a
-different concern.
-
-**Branches**:
-
-* abstract-datasource: dynamic routing of multiple datasources
-* structured-logging: structured logging using logback and a json encoder
-* error-handling: comparing various error handling patterns
-* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
-* feature-management: using Azure App Configuration to manage feature flags
-* spring-libs: creating and consuming Spring libraries
-* spring-properties: defining and using Spring Boot properties
-* context-propagation: propagating thread-local context to async executions in Spring MVC
-* spring-converters: creating and using Spring converters
+* toUpperCaseSync - Synchronous execution
+* toUpperCaseWithCfOnCommonPool - Asynchronous execution with `CompletableFuture` on common pool
+* toUpperCaseWithCfOnSpringPool - Asynchronous execution with `CompletableFuture` on Spring pool
+* toUpperCaseWithSpringAsync - Asynchronous execution with `@Async` on Spring default pool
+* toUpperCaseWithSpringAsyncOnIoPool - Asynchronous execution with `@Async` on Spring custom pool. Requires setting
+`app.task.execution.io-pool.enabled` to `true`
