@@ -8,5 +8,4 @@ spring:
   cache:
     redis:
       time-to-live: 1m
-      enable-statistics: true
       key-prefix: "demo-app::"
