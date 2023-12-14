@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -e
+CONTAINER_NAME=redis-dmp
+PASSWORD=dummy
+HOST_PORT=6379
+
+startContainer() {
+  docker run -d --rm --name $CONTAINER_NAME \
+    -p ${HOST_PORT}:6379 \
+    --pull always \
+    redis:6.0-alpine \
+    redis-server --requirepass $PASSWORD
+  echo "Redis is up and running! Connect to redis://localhost:${HOST_PORT} with password $PASSWORD"
+}
+
+stopContainer() {
+  docker stop $CONTAINER_NAME
+}
+
+usage() {
+  echo "Redis Container"
+  echo "usage: ${0} [start|stop]"
+  echo "options:"
+  echo "<no flag>    Starts the Redis container."
+  echo "start        Starts the Redis container."
+  echo "stop         Stops and removes the Redis container."
+  echo
+  exit 1
+}
+
+case $1 in
+  '' | start )
+  startContainer
+  ;;
+
+  stop )
+  stopContainer
+  ;;
+
+  * )
+  usage
+  ;;
+esac
