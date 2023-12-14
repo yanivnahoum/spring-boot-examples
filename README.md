@@ -1,17 +1,19 @@
-## Spring Boot Examples
+## Spring Cache With Redis
 
-This repo contains multiple branches, each an isolated Spring Boot app demonstrating the use or implementation of a
-different concern.
+### Running the application
 
-**Branches**:
+1. Run Redis locally: `./redis`
+2. Optionally connect your desktop client to Redis @ localhost:6379, password=dummy
+3. Run the application locally
+4. http requests:
 
-* abstract-datasource: dynamic routing of multiple data sources
-* structured-logging: structured logging using logback and a json encoder
-* error-handling: comparing various error handling patterns
-* composition-vs-inheritance: comparing 2 software design patterns: composition vs inheritance
-* feature-management: using Azure App Configuration to manage feature flags
-* spring-libs: creating and consuming Spring libraries
-* spring-properties: defining and using Spring Boot properties
-* context-propagation: propagating thread-local context to async executions in Spring MVC
-* spring-converters: creating and using Spring converters
-* spring-threading: Parallelizing tasks using Spring's TaskExecutor, Async and CompletableFutures
+* Fetch user1: `http :8080/demo/users/1`
+* Fetch user1 again: `http :8080/demo/users/1` - notice the cache hit (no db access)
+* Update user1: `http PUT :8080/demo/users id=1 name=aaa`
+* Delete user 1: `http DELETE :8080/demo/users/1`
+
+5. Stop Redis: `./redis stop`
+
+### Testing the application
+
+Run [SpringBootExamplesApplicationTest](src/test/java/com/att/training/springboot/examples/SpringBootExamplesApplicationTest.java)
