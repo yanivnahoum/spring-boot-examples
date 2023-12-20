@@ -19,6 +19,7 @@ public class CacheConfig {
         return RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
                 .prefixCacheNameWith(redisCacheProperties.getKeyPrefix())
+//                .computePrefixWith(cacheName -> cacheName + ":")
                 .entryTtl(redisCacheProperties.getTimeToLive())
                 .serializeValuesWith(SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(User.class)));
     }
