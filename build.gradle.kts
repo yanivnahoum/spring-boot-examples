@@ -20,9 +20,6 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -30,7 +27,6 @@ tasks {
     withType<JavaCompile>().configureEach {
         with(options) {
             release = 17
-            compilerArgs.add("-Xlint:all,-processing,-auxiliaryclass")
         }
     }
 
