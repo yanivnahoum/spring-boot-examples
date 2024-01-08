@@ -3,9 +3,10 @@ server:
     context-path: /demo
 
 spring:
-  redis:
-    password: dummy
   cache:
     redis:
       time-to-live: 1m
-      key-prefix: "demo-app::"
+      key-prefix: "demo-app:"
+  data:
+    redis:
+      password: dummy

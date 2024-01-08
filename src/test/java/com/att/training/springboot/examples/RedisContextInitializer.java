@@ -29,7 +29,7 @@ public class RedisContextInitializer implements ApplicationContextInitializer<Co
     @Override
     public void initialize(@NonNull ConfigurableApplicationContext applicationContext) {
         TestPropertyValues values = TestPropertyValues.of(
-                "spring.redis.port=%d".formatted(redis.getFirstMappedPort())
+                "spring.data.redis.port=%d".formatted(redis.getFirstMappedPort())
         );
         values.applyTo(applicationContext);
     }
