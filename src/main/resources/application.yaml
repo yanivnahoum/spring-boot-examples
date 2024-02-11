@@ -1,0 +1,3 @@
+spring:
+  reactor:
+    context-propagation: limited
