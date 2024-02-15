@@ -21,24 +21,32 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    runtimeOnly("com.oracle.database.jdbc:ojdbc11")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks {
+    val jvmArgs = listOf("--enable-preview")
     withType<JavaCompile>().configureEach {
         with(options) {
             release = 21
-            compilerArgs.add("-Xlint:all,-processing,-auxiliaryclass")
+            compilerArgs.addAll(jvmArgs + "-Xlint:all,-processing,-auxiliaryclass")
         }
     }
 
-    withType<Test> {
+    test {
+        jvmArgs(jvmArgs)
         useJUnitPlatform()
         testLogging {
             events("passed", "skipped", "failed")
             showStandardStreams = true
         }
+    }
+
+    withType<JavaExec>().configureEach {
+        jvmArgs(jvmArgs)
     }
 }
