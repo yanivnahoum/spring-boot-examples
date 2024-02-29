@@ -4,7 +4,6 @@ app:
     response-timeout: 10s
   some-property: from yaml
 
-#spring:
-#  config:
-#    import: configtree:/app/config/
-
+spring:
+  config:
+    import: configtree:app/config/
