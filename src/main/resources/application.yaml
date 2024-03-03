@@ -9,4 +9,4 @@ spring:
   config:
     activate:
       on-profile: prod
-    import: configserver:http://abc.com:8080
+    import: configserver:https://abc.com:8080
