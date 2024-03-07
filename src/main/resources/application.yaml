@@ -1,11 +1,11 @@
 spring:
   task:
     execution:
-        pool:
-            max-size: 8
+      pool:
+        max-size: 8
 
 app:
   task:
     execution:
-        io-pool:
-            enabled: false
+      io-pool:
+        enabled: false
