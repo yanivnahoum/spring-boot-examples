@@ -18,4 +18,6 @@ spring:
       data-source-properties:
         oracle.net.CONNECT_TIMEOUT: 3000
         oracle.jdbc.ReadTimeout: 15000
+        # Default is NETWORK. LOCAL just checks local socket. SOCKET sends out a TCP packet but doesn't access db
+        oracle.jdbc.defaultConnectionValidation: NETWORK
 
