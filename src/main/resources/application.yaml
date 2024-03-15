@@ -15,4 +15,7 @@ spring:
     hikari:
       maximum-pool-size: 2
       keepalive-time: 180000
+      data-source-properties:
+        oracle.net.CONNECT_TIMEOUT: 3000
+        oracle.jdbc.ReadTimeout: 15000
 

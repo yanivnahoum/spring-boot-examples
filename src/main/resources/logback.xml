@@ -8,6 +8,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.zaxxer.hikari" level="debug"/>
+
     <root level="info">
         <appender-ref ref="stdout"/>
     </root>
