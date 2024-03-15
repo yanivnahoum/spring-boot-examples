@@ -8,10 +8,5 @@ class SpringBootExamplesApplicationTests {
 
     @Test
     void contextLoads() {
-        try {
-            Integer.parseInt("hello");
-        } catch (NumberFormatException _) {
-            System.err.println("Error");
-        }
     }
 }
