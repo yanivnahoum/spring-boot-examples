@@ -27,14 +27,16 @@ dependencies {
 }
 
 tasks {
+    val jvmArgs = listOf("--enable-preview")
     withType<JavaCompile>().configureEach {
         with(options) {
             release = 21
-            compilerArgs.add("-Xlint:all,-processing,-auxiliaryclass")
+            compilerArgs.addAll(jvmArgs + "-Xlint:all,-processing,-auxiliaryclass")
         }
     }
 
     withType<Test> {
+        jvmArgs(jvmArgs)
         useJUnitPlatform()
         testLogging {
             events("passed", "skipped", "failed")
