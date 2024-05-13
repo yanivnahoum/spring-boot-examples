@@ -40,9 +40,9 @@ class UserDao {
         // We don't have this (yet) in java
         // var streetNum = person?.address?.street?.number;
 //        Optional.ofNullable(person)
-//                .map(Person::address())
-//                .map(Address::street())
-//                .map(Street::number())
+//                .map(Person::address)
+//                .map(Address::street)
+//                .map(Street::number)
 //                .orElse(null);
     }
 }
