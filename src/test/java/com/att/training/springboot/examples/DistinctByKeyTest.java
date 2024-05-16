@@ -62,7 +62,7 @@ class DistinctByKeyTest {
                 new User(2, "Bob"),
                 new User(3, "Alice"),
                 new User(4, "David"),
-                new User(2, "Bob")
+                new User(5, "Bob")
         );
 
 
@@ -89,7 +89,7 @@ class DistinctByKeyTest {
                 new User(2, "Bob"),
                 new User(3, "Alice"),
                 new User(4, "David"),
-                new User(2, "Bob")
+                new User(5, "Bob")
         );
 
         var distinctUsers = users.stream()
@@ -116,7 +116,7 @@ class DistinctByKeyTest {
                 new User(2, "Bob"),
                 new User(3, "Alice"),
                 new User(4, "David"),
-                new User(2, "Bob")
+                new User(5, "Bob")
         );
 
         var distinctUsers = users.stream()
@@ -128,8 +128,6 @@ class DistinctByKeyTest {
                 new User(2, "Bob"),
                 new User(4, "David")
         );
-
-
     }
 
     private <T, R> Predicate<T> distinctByKey(Function<? super T, ? extends R> keyExtractor) {
