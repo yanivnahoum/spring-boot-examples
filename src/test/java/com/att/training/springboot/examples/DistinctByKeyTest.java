@@ -69,7 +69,7 @@ class DistinctByKeyTest {
         var distinctNames = new HashSet<String>();
         var distinctUsers = new ArrayList<User>();
         for (var user : users) {
-            var added = distinctNames.add(user.name().toLowerCase());
+            var added = distinctNames.add(user.name());
             if (added) {
                 distinctUsers.add(user);
             }
