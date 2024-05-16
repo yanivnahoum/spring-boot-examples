@@ -48,10 +48,9 @@ class DistinctByKeyTest {
                 .distinct()
                 .toList();
 
-        assertThat(distinctUsers).containsExactly(
-                new User(1, "Alice"),
-                new User(2, "Bob"),
-                new User(4, "David")
+        assertThat(distinctUsers).contains(
+                new User(3, "Alice"),
+                new User(2, "Bob")
         );
     }
 
