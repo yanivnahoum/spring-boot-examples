@@ -2,6 +2,7 @@ package com.att.training.springboot.examples;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,6 +21,7 @@ class ChainingFuturesTest {
         executor.shutdown();
     }
 
+    @Disabled("Enable to get see the timeout exception")
     @Test
     void bad() {
         CompletableFuture.supplyAsync(this::task1, executor)

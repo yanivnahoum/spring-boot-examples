@@ -16,15 +16,25 @@ class UserDao {
     private final JdbcClient jdbcClient;
 
     @Nullable
-    User findUserById() {
-        var users = jdbcClient.sql("SELECT id, name FROM users")
+    User findUserById(long id) {
+        var users = jdbcClient.sql("""
+                        SELECT id, name
+                        FROM users
+                        WHERE id = ?
+                        """)
+                .param(id)
                 .query(userRowMapper)
                 .list();
         return singleResult(users);
     }
 
-    Optional<User> findUserById2() {
-        return jdbcClient.sql("SELECT id, name FROM users")
+    Optional<User> findUserById2(long id) {
+        return jdbcClient.sql("""
+                        SELECT id, name
+                        FROM users
+                        WHERE id = ?
+                        """)
+                .param(id)
                 .query(userRowMapper)
                 .optional();
     }
@@ -53,7 +63,7 @@ class UserService {
     private UserDao userDao;
 
     User findUserById() {
-        var user = userDao.findUserById();
+        var user = userDao.findUserById(100);
         if (user == null) {
             throw new UserNotFoundException();
         }
@@ -62,7 +72,7 @@ class UserService {
     }
 
     User findUserById2() {
-        return userDao.findUserById2()
+        return userDao.findUserById2(100)
                 .orElseThrow(UserNotFoundException::new);
     }
 
