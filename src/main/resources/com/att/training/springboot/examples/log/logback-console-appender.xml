@@ -13,30 +13,25 @@
                                 "timestamp": "%date",
                                 "level": "%level",
                                 "thread": "%thread",
-                                "app": "${appName:-app}",
+                                "correlationId": "%mdc{X-ATT-ConversationId}",
                                 "class": "%logger",
-                                "correlationId": "%mdc{correlationId}",
                                 "message": "%message",
-                                "stackTrace": "%throwable"
+                                "stackTrace": "%throwable",
+                                "app":"${appName:-app}"
                                 }
                             </pattern>
                         </pattern>
                         <logLevelValue>
                             <fieldName>levelValue</fieldName>
                         </logLevelValue>
-                        <!--                <arguments>-->
-                        <!--                    <fieldName>args</fieldName>-->
-                        <!--                </arguments>-->
-                        <!--                <mdc>-->
-                        <!--                    <fieldName>mdc</fieldName>-->
-                        <!--                </mdc>-->
                         <nestedField>
-                            <fieldName>additionalInfo</fieldName>
+                            <fieldName>additional</fieldName>
                             <providers>
                                 <arguments/>
                                 <logstashMarkers/>
+                                <keyValuePairs/>
                                 <mdc>
-                                    <excludeMdcKeyName>correlationId</excludeMdcKeyName>
+                                    <excludeMdcKeyName>X-ATT-ConversationId</excludeMdcKeyName>
                                 </mdc>
                             </providers>
                         </nestedField>
@@ -47,7 +42,7 @@
         <else>
             <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder>
-                    <pattern>%clr(%d){faint} %clr(${appName:-app}){yellow} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{50}){cyan} %msg%n</pattern>
+                    <pattern>%clr(%d){faint} %clr(%-5level) %clr(${appName:-app}){yellow} %clr(%thread){magenta} %clr(%logger{30}){cyan} %msg %clr(%mdc){green,bold} %clr(%kvp){blue}%n</pattern>
                 </encoder>
             </appender>
         </else>
