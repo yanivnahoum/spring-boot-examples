@@ -1,0 +1,3 @@
+app:
+  user:
+    base-url: http://localhost:8088
