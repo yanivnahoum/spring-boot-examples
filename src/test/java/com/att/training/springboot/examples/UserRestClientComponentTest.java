@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserRestClientComponentTest {
     private static final int availablePort = TestSocketUtils.findAvailableTcpPort();
-    private static MockWebServer mockWebServer;
+    private MockWebServer mockWebServer;
     @Autowired
     private UserRestClient userRestClient;
 
@@ -41,7 +41,7 @@ class UserRestClientComponentTest {
 
     @DynamicPropertySource
     static void addProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.user.base-url", () -> "http://localhost:%d/user/api".formatted(availablePort));
+        registry.add("app.user.base-url", () -> "http://localhost:%d/api".formatted(availablePort));
     }
 
     @Order(1)
