@@ -15,6 +15,7 @@ import static java.util.Map.entry;
 import static net.logstash.logback.argument.StructuredArguments.defer;
 import static net.logstash.logback.argument.StructuredArguments.entries;
 import static net.logstash.logback.argument.StructuredArguments.kv;
+import static net.logstash.logback.argument.StructuredArguments.value;
 import static net.logstash.logback.marker.Markers.append;
 import static net.logstash.logback.marker.Markers.appendEntries;
 
@@ -31,8 +32,16 @@ public class UserController {
         log.info("#getById - Attempt to fetch user {}", id);
         var user = userService.getById(id);
 
+        // Structured logging using slf4j2 fluent api (KVs appear in plain text too!)
+        log.atInfo()
+                .setMessage("#getById - Found user {}")
+                .addArgument(user.id())
+                .addKeyValue("userId", user.id())
+                .addKeyValue("userAsJson", user)
+                .log();
+
         // Structured logging using logstash's StructuredArguments
-        log.info("#getById - Found user!", kv("userId", user.id()), kv("username", user.name()));
+        log.info("#getById - Found user {}", value("userId", user.id()), kv("username", user.name()));
         var args = Map.ofEntries(
                 entry("userId", user.id()),
                 entry("username", user.name())

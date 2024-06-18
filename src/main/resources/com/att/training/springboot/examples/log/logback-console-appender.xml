@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <if condition='isDefined("KUBERNETES_SERVICE_HOST")'>
+    <if condition='!isDefined("KUBERNETES_SERVICE_HOST")'>
         <then>
             <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
