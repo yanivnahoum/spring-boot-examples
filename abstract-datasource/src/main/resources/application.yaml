@@ -1,0 +1,23 @@
+server:
+  servlet:
+    context-path: /app
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      ignoreRoutingDataSources: true
+app:
+  datasource:
+    east:
+      url: jdbc:postgresql://localhost:54320/east
+      username: postgres
+      password: east
+      hikari:
+        maximum-pool-size: 5
+    west:
+      url: jdbc:postgresql://localhost:54321/west
+      username: postgres
+      password: west
