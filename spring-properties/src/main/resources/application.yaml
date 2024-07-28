@@ -1,0 +1,9 @@
+app:
+  order-client:
+    base-url: https://localhost:8090
+    response-timeout: 10s
+  some-property: from yaml
+
+spring:
+  config:
+    import: configtree:app/config/

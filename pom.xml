@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,6 +24,10 @@
         <module>abstract-datasource</module>
         <module>composition-vs-inheritance</module>
         <module>context-propagation</module>
+        <module>spring-concurrency</module>
+        <module>spring-kafka</module>
+        <module>spring-properties</module>
+        <module>structured-logging</module>
     </modules>
 
     <build>

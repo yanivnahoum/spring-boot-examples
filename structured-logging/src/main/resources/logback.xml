@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+    <variable name="appName" value="example-app"/>
+    <include resource="com/att/training/springboot/examples/log/logback-console-appender.xml"/>
+
+    <!--    <logger name="com.att.training.springboot.examples.user" level="debug"/>-->
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
