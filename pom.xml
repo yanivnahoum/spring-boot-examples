@@ -28,6 +28,7 @@
         <module>spring-kafka</module>
         <module>spring-properties</module>
         <module>structured-logging</module>
+        <module>http-clients</module>
     </modules>
 
     <build>
