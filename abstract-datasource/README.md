@@ -13,8 +13,8 @@ See the [data file](src/main/resources/data.sql) for the initial data.
 ### Run the example:
 
 1. Start the 2 containerized databases by cd'ing into the [db](db) directory and running: `docker compose up --detach`
-2. Run the app (main class
-   is [SpringBootExamplesApplication](src/main/java/com/att/training/springboot/examples/SpringBootExamplesApplication.java))
+   2. Run the app (main class
+      is [AbstractDatasourceApplication](src/main/java/com/att/training/springboot/examples/AbstractDatasourceApplication.java)
 3. Make an HTTP request to insert a record into the **east** db: `http :8080/app/users id=10 name=Alice`
 4. Make an HTTP request to insert a record into the **west** db: `http :8080/app/users id=110 name=Bob`
 5. Make an HTTP request to insert a record into the **default** (east) db: `http :8080/app/users id=210 name=Carl`

@@ -3,12 +3,23 @@ server:
     context-path: /app
 
 management:
+  server:
+    port: 8081
   endpoint:
     health:
       show-details: always
+      probes:
+        enabled: true
+        add-additional-paths: true
+      group:
+        readiness:
+          #          include: readinessState, db
+          include: readinessState, multiDataSource
   health:
     db:
-      ignoreRoutingDataSources: true
+      #      ignoreRoutingDataSources: true
+      enabled: false
+
 app:
   datasource:
     east:
@@ -16,8 +27,12 @@ app:
       username: postgres
       password: east
       hikari:
+        pool-name: east
         maximum-pool-size: 5
     west:
       url: jdbc:postgresql://localhost:54321/west
       username: postgres
       password: west
+      hikari:
+        pool-name: west
+        maximum-pool-size: 5
