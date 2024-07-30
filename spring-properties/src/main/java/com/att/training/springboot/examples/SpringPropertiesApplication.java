@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @Slf4j
-public class SomePropertiesApplication {
+public class SpringPropertiesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SomePropertiesApplication.class, args);
+        SpringApplication.run(SpringPropertiesApplication.class, args);
     }
 
     @Bean
