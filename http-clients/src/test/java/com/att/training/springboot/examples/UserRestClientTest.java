@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
@@ -21,7 +22,11 @@ class UserRestClientTest {
     void setUp() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-        UserClientProperties userClientProperties = new UserClientProperties(mockWebServer.url("/api").toString());
+        UserClientProperties userClientProperties = new UserClientProperties(
+                mockWebServer.url("/api").toString(),
+                Duration.ofSeconds(1),
+                Duration.ofSeconds(1)
+        );
         userRestClient = new UserRestClient(RestClient.builder(), userClientProperties);
     }
 
