@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <if condition='!isDefined("KUBERNETES_SERVICE_HOST")'>
-        <then>
-            <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <if condition='!isDefined("KUBERNETES_SERVICE_HOST")'>
+            <then>
                 <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
                     <providers>
                         <pattern>
@@ -40,14 +40,12 @@
                         <path>/additional/user/name</path>
                     </jsonGeneratorDecorator>
                 </encoder>
-            </appender>
-        </then>
-        <else>
-            <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+            </then>
+            <else>
                 <encoder>
                     <pattern>%clr(%d){faint} %clr(%-5level) %clr(${appName:-app}){yellow} %clr(%thread){magenta} %clr(%logger{30}){cyan} %msg %clr(%mdc){green,bold} %clr(%kvp){blue}%n</pattern>
                 </encoder>
-            </appender>
-        </else>
-    </if>
+            </else>
+        </if>
+    </appender>
 </included>
