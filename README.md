@@ -15,7 +15,7 @@ different concern.
 * context-propagation: propagating thread-local context to async executions in Spring MVC
 * spring-converters: creating and using Spring converters
 * spring-concurrency: Parallelizing tasks using Spring's TaskExecutor, Async and CompletableFutures
-* http-client: various Spring http clients
+* http-clients: using and testing various Spring http clients
 * enable-preview: a simple project using java 21 with preview features enabled for prod and test code
 * misc-topics: a few small and useful solutions to common use-cases:
     * How to avoid deadlocks when async tasks spawn additional async tasks
