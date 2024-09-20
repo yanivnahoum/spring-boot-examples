@@ -1,0 +1,23 @@
+services:
+  oracle1:
+    image: ad833w518/oracle-db:19.3.0-arm
+    #    image: gvenzl/oracle-xe:slim-faststart
+    ports:
+    - "15211:1521"
+    volumes:
+    - ./scripts:/container-entrypoint-initdb.d
+    environment:
+      ORACLE_RANDOM_PASSWORD: true
+      APP_USER: oracle
+      APP_USER_PASSWORD: dummy
+
+  oracle2:
+    image: ad833w518/oracle-db:19.3.0-arm
+    ports:
+    - "15212:1521"
+    volumes:
+    - ./scripts:/container-entrypoint-initdb.d
+    environment:
+      ORACLE_RANDOM_PASSWORD: true
+      APP_USER: oracle
+      APP_USER_PASSWORD: dummy

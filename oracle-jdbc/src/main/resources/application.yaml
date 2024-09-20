@@ -1,0 +1,23 @@
+server:
+  servlet:
+    context-path: /demo
+
+spring:
+  jdbc:
+    template:
+      query-timeout: 10s
+      fetch-size: 1000
+
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.106.2:15211,192.168.106.2:15212/XEPDB1
+    username: oracle
+    password: dummy
+    hikari:
+      maximum-pool-size: 2
+      keepalive-time: 180000
+      data-source-properties:
+        oracle.net.CONNECT_TIMEOUT: 3000
+        oracle.jdbc.ReadTimeout: 15000
+        # Default is NETWORK. LOCAL just checks local socket. SOCKET sends out a TCP packet but doesn't access db
+        oracle.jdbc.defaultConnectionValidation: NETWORK
+

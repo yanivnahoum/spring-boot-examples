@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    azure:
+      appconfiguration:
+        enabled: ${azure.appconfig.enabled:false}
+        stores:
+        - connection-string: ${azure.appconfig.connection-string}
+          feature-flags:
+            enabled: true
+            selects:
+            - label-filter: ',${spring.profiles.active}'
+              # For a feature flag with the following path: app1:someFeature or app1/someFeature
+              # the name will be app1someFeature
+          #              key-filter: 'app1:*'
+          #            - label-filter: ',${spring.profiles.active}'
+          #              key-filter: 'app2/*'
+          monitoring:
+            feature-flag-refresh-interval: 10s
