@@ -35,6 +35,7 @@
         <module>spring-libs</module>
         <module>oracle-jdbc</module>
         <module>feature-management</module>
+        <module>spring-cloud-gateway-mvc</module>
     </modules>
 
     <build>
