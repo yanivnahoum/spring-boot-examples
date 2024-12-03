@@ -1,7 +1,7 @@
 package com.att.training.springboot.examples;
 
-import org.springframework.boot.web.client.ClientHttpRequestFactories;
-import org.springframework.boot.web.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
+import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -18,10 +18,11 @@ public class UserRestClient {
     }
 
     private ClientHttpRequestFactory buildRequestFactory(UserClientProperties userClientProperties) {
-        ClientHttpRequestFactorySettings requestFactorySettings = ClientHttpRequestFactorySettings.DEFAULTS
+        ClientHttpRequestFactorySettings requestFactorySettings = ClientHttpRequestFactorySettings.defaults()
                 .withConnectTimeout(userClientProperties.connectTimeout())
                 .withReadTimeout(userClientProperties.readTimeout());
-        return ClientHttpRequestFactories.get(requestFactorySettings);
+        return ClientHttpRequestFactoryBuilder.httpComponents()
+                .build(requestFactorySettings);
     }
 
     public User getUser(long id) {
