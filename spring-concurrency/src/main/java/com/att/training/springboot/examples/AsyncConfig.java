@@ -36,12 +36,7 @@ public class AsyncConfig {
     @ConditionalOnProperty(name = "app.task.execution.io-pool.enabled")
     @Configuration(proxyBeanMethods = false)
     static class ExtraConfiguration {
-        @Bean
-        TaskExecutor taskExecutor(ThreadPoolTaskExecutorBuilder builder) {
-            return builder.build();
-        }
-
-        @Bean
+        @Bean(defaultCandidate = false)
         TaskExecutor ioTaskExecutor() {
             return new ThreadPoolTaskExecutorBuilder()
                     .corePoolSize(8)
