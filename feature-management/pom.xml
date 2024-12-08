@@ -12,7 +12,7 @@
     <artifactId>feature-management</artifactId>
 
     <properties>
-        <spring-cloud-azure-dependencies.version>5.16.0</spring-cloud-azure-dependencies.version>
+        <spring-cloud-azure-dependencies.version>5.18.0</spring-cloud-azure-dependencies.version>
     </properties>
 
     <dependencyManagement>

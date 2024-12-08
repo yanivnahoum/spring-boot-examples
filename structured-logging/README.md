@@ -9,10 +9,11 @@ for setting and clearing some of the context info,
 and [LogContext](src/main/java/com/att/training/springboot/examples/log/LogContext.java) to encapsulate all MDC related
 actions.
 
-Structured arguments per message are demonstrated by 2 alternatives:
+Structured arguments per message are demonstrated by 3 alternatives:
 
-1. Using StructuredArguments as message arguments
-2. Using Markers
+1. Using Logstash's StructuredArguments as message arguments
+2. Using Slf4j's Markers
+3. Using Slf4j's KeyValue Pairs
 
 Run the app via and send one of the following requests:
 

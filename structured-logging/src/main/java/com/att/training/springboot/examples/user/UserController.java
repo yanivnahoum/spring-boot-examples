@@ -46,18 +46,18 @@ public class UserController {
                 entry("userId", user.id()),
                 entry("username", user.name())
         );
-        log.info("#getById - Found user!", entries(args));
-        log.info("#getById - Found user!", defer(() -> entries(args)));
+        log.info("#getById - Found user1!", entries(args));
+        log.info("#getById - Found user2!", defer(() -> entries(args)));
         // Send a POJO as a value:
-        log.info("#getById - Found user!", kv("user", user));
+        log.info("#getById - Found user3!", kv("user", user));
         // This is only possible with StructuredArguments
         log.info("#getById - Found user with {}, {}", kv("userId", user.id()), kv("username", user.name()));
 
         // Structured logging using markers
         log.info(append("userId", user.id())
                         .and(append("username", user.name())),
-                "#getById - Found user!");
-        log.info(appendEntries(args), "#getById - Found user!");
+                "#getById - Found user4!");
+        log.info(appendEntries(args), "#getById - Found user5!");
         log.info(Markers.defer(() -> appendEntries(args)), "#getById - Found user!");
         // Send a POJO as a value:
         log.info(append("user", user), "#getById - Found user!");
