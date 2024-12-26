@@ -22,5 +22,4 @@ different concern.
     * Stream API: using the element and its index
     * Stream API: Distinct with key
 * spring-cache-redis - Using spring-cache backed by Redis
-* spring-boot-2.7 - Resolving SCA issues in Spring Boot 2.7.18
 * oracle-jdbc: Using multiple Oracle data sources in a single jdbc url

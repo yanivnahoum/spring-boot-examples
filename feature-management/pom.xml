@@ -11,10 +11,6 @@
 
     <artifactId>feature-management</artifactId>
 
-    <properties>
-        <spring-cloud-azure-dependencies.version>5.19.0</spring-cloud-azure-dependencies.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>

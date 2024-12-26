@@ -6,8 +6,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.TopicBuilder;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.kafka.ConfluentKafkaContainer;
 
 public class TestSpringKafkaApplication {
     public static void main(String[] args) {
@@ -21,8 +20,8 @@ public class TestSpringKafkaApplication {
 class ContainersConfiguration {
     @ServiceConnection
     @Bean
-    KafkaContainer kafkaContainer() {
-        return new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.7.1"));
+    ConfluentKafkaContainer kafkaContainer() {
+        return new ConfluentKafkaContainer("confluentinc/cp-kafka:7.8.0");
     }
 
     @Bean

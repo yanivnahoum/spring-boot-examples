@@ -11,10 +11,6 @@
 
     <artifactId>spring-cloud-gateway-mvc</artifactId>
 
-    <properties>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
