@@ -1,4 +1,4 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.oracle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

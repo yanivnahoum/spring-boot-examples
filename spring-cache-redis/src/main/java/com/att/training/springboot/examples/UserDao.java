@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toMap;
 @Repository
 @Slf4j
 public class UserDao {
-    private static final Map<Integer, User> idToUser = Stream.of(
+    private static final Map<Integer, User> usersById = Stream.of(
                     new User(1, "Alice"),
                     new User(2, "Bob"),
                     new User(3, "Charlie"))
@@ -24,16 +24,16 @@ public class UserDao {
     public User findById(int id) {
         log.info("#findById - fetching user from db, id={}", id);
         SECONDS.sleep(1);
-        return idToUser.get(id);
+        return usersById.get(id);
     }
 
     public void update(User user) {
         log.info("#update - updating user in db, user={}", user);
-        idToUser.put(user.id(), user);
+        usersById.put(user.id(), user);
     }
 
     public void delete(int id) {
         log.info("#delete - deleting user from db, id={}", id);
-        idToUser.remove(id);
+        usersById.remove(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.att.training.springboot.examples;
+package com.att.training.springboot.examples.oracle;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
