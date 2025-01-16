@@ -8,3 +8,6 @@ property in the [`application.yaml`](src/main/resources/application.yml) file.
 The custom mapper, defined [here](src/main/java/com/att/training/springboot/examples/JacksonConfig.java), is configured
 to ignore unknown properties. To inject it into Spring beans,
 the [`@Liberal`](src/main/java/com/att/training/springboot/examples/Liberal.java) qualifier is required.
+
+Run the [UserControllerTest](src/test/java/com/att/training/springboot/examples/UserControllerTest.java) to see these
+two mappers in action!
