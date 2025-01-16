@@ -1,0 +1,7 @@
+PATCH http://localhost:8080/multiple-object-mappers/users
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "John"
+}

@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /multiple-object-mappers
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
