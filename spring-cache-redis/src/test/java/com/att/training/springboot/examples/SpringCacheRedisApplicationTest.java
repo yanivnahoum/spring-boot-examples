@@ -17,8 +17,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -43,12 +41,16 @@ class SpringCacheRedisApplicationTest {
     @Test
     void givenUserId1_whenGetUserTwice_dbIsAccessedOnlyOnce() {
         int id = 1;
-        var result = mockMvc.perform(get("/users/{id}", id));
+        var result = mockMvc.get()
+                .uri("/users/{id}", id)
+                .exchange();
         assertThat(result).hasStatus(OK);
 
-        result = mockMvc.perform(get("/users/{id}", id));
-        assertThat(result).hasStatus(OK);
+        result = mockMvc.get()
+                .uri("/users/{id}", id)
+                .exchange();
 
+        assertThat(result).hasStatus(OK);
         verify(userDao).findById(id);
     }
 
@@ -60,17 +62,21 @@ class SpringCacheRedisApplicationTest {
                     "id": %d,
                     "name": "John"
                 }""".formatted(id);
-        var result = mockMvc.perform(put("/users")
+        var result = mockMvc.put()
+                .uri("/users")
                 .content(updatedUser)
-                .contentType(APPLICATION_JSON));
+                .contentType(APPLICATION_JSON)
+                .exchange();
         assertThat(result).hasStatus(OK);
 
-        result = mockMvc.perform(put("/users")
+        result = mockMvc.put()
+                .uri("/users")
                 .content(updatedUser)
-                .contentType(APPLICATION_JSON));
+                .contentType(APPLICATION_JSON)
+                .exchange();
+
         assertThat(result).hasStatus(OK)
                 .bodyJson().isEqualTo(updatedUser);
-
         verify(userDao, never()).findById(id);
     }
 }

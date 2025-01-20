@@ -65,7 +65,8 @@ class UserControllerTest {
         var result = mockMvc.patch()
                 .uri("/users")
                 .contentType(APPLICATION_JSON)
-                .content(JSON_WITH_UNKNOWN_PROPERTY);
+                .content(JSON_WITH_UNKNOWN_PROPERTY)
+                .exchange();
 
         assertThat(result).hasStatus(BAD_REQUEST);
     }
