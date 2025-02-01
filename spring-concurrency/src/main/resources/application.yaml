@@ -8,4 +8,4 @@ app:
   task:
     execution:
       io-pool:
-        enabled: true
+        enabled: false

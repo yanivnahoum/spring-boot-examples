@@ -20,6 +20,7 @@ management:
       #      ignoreRoutingDataSources: true
       enabled: false
 
+
 app:
   datasource:
     east:
@@ -36,3 +37,12 @@ app:
       hikari:
         pool-name: west
         maximum-pool-size: 5
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  task:
+    execution:
+      simple:
+        concurrency-limit: 100
