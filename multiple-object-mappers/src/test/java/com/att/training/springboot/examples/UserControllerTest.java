@@ -18,7 +18,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.argumentSet;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -35,14 +34,14 @@ class UserControllerTest {
     private static final String STANDARD_JSON = """
             {
                 "id": 1,
-                "name": "John"
+                "name": "John"±
             }
             """;
     @Autowired
-    private ObjectMapper strictObjectMapper;
-    @Liberal
-    @Autowired
     private ObjectMapper objectMapper;
+    @Strict
+    @Autowired
+    private ObjectMapper strictObjectMapper;
     @Autowired
     private MockMvcTester mockMvc;
 
@@ -65,10 +64,10 @@ class UserControllerTest {
         var result = mockMvc.patch()
                 .uri("/users")
                 .contentType(APPLICATION_JSON)
-                .content(JSON_WITH_UNKNOWN_PROPERTY)
+                .content(json)
                 .exchange();
 
-        assertThat(result).hasStatus(BAD_REQUEST);
+        assertThat(result).hasStatus(expectedStatus);
     }
 
     static Stream<Arguments> patchRequest() {
@@ -76,7 +75,7 @@ class UserControllerTest {
                 argumentSet("given a user, when PATCH Request, then respond with 204",
                         STANDARD_JSON, NO_CONTENT),
                 argumentSet("given a user with an unknown property, when PATCH Request, then respond with 400",
-                        JSON_WITH_UNKNOWN_PROPERTY, BAD_REQUEST)
+                        JSON_WITH_UNKNOWN_PROPERTY, NO_CONTENT)
         );
     }
 }

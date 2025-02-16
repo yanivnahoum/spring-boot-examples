@@ -13,11 +13,11 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Qualifies a liberal {@link ObjectMapper}, one that does not fail
+ * Qualifies a strict {@link ObjectMapper}, one that fails
  * on deserialization of unknown properties.
  */
 @Target({FIELD, PARAMETER, METHOD})
 @Retention(RUNTIME)
 @Documented
-@Qualifier("liberalObjectMapper")
-public @interface Liberal {}
+@Qualifier("strictMapper")
+public @interface Strict {}

@@ -7,9 +7,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration(proxyBeanMethods = false)
 public class JacksonConfig {
-    @Liberal
+    @Strict
     @Bean(defaultCandidate = false)
     ObjectMapper liberalObjectMapper(Jackson2ObjectMapperBuilder builder) {
-        return builder.failOnUnknownProperties(false).build();
+        return builder.failOnUnknownProperties(true).build();
     }
 }
