@@ -34,11 +34,11 @@ class UserControllerTest {
     private static final String STANDARD_JSON = """
             {
                 "id": 1,
-                "name": "John"±
+                "name": "John"
             }
             """;
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper defaultObjectMapper;
     @Strict
     @Autowired
     private ObjectMapper strictObjectMapper;
@@ -46,13 +46,13 @@ class UserControllerTest {
     private MockMvcTester mockMvc;
 
     @Test
-    void givenUserWithUnknownProperty_whenDeserializingUsingLiberalMapper_thenSucceed() throws JsonProcessingException {
-        var user = objectMapper.readValue(JSON_WITH_UNKNOWN_PROPERTY, User.class);
+    void givenUserWithUnknownProperty_whenDeserializingUsingDefaultMapper_thenSucceed() throws JsonProcessingException {
+        var user = defaultObjectMapper.readValue(JSON_WITH_UNKNOWN_PROPERTY, User.class);
         assertThat(user).isEqualTo(new User(1, "John"));
     }
 
     @Test
-    void givenUserWithUnknownProperty_whenDeserializingUsingDefaultMapper_thenFailWithJsonMappingException() {
+    void givenUserWithUnknownProperty_whenDeserializingUsingStrictMapper_thenFailWithJsonMappingException() {
         assertThatThrownBy(() -> strictObjectMapper.readValue(JSON_WITH_UNKNOWN_PROPERTY, User.class))
                 .isInstanceOf(JsonMappingException.class)
                 .hasMessageContaining("Unrecognized field \"age\"");
@@ -74,7 +74,7 @@ class UserControllerTest {
         return Stream.of(
                 argumentSet("given a user, when PATCH Request, then respond with 204",
                         STANDARD_JSON, NO_CONTENT),
-                argumentSet("given a user with an unknown property, when PATCH Request, then respond with 400",
+                argumentSet("given a user with an unknown property, when PATCH Request, then respond with 204",
                         JSON_WITH_UNKNOWN_PROPERTY, NO_CONTENT)
         );
     }
