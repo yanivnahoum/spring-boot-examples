@@ -3,9 +3,6 @@ server:
     context-path: /demo
 
 spring:
-  data:
-    redis:
-      password: dummy
   cache:
     redis:
       time-to-live: 1m

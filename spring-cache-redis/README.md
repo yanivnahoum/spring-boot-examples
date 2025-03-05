@@ -2,18 +2,11 @@
 
 ### Running the application
 
-1. Run Redis locally: `./redis`
-2. Optionally connect your desktop client to Redis @ localhost:6379, password=dummy
-3. Run the application locally
-4. http requests:
-
-* Fetch user1: `http :8080/demo/users/1`
-* Fetch user1 again: `http :8080/demo/users/1` - notice the cache hit (no db access)
-* Update user1: `http PUT :8080/demo/users id=1 name=aaa`
-* Delete user 1: `http DELETE :8080/demo/users/1`
-
-5. Stop Redis: `./redis stop`
+1. [Run the application locally](src/test/java/com/att/training/springboot/examples/TestSpringCacheRedisApplication.java)
+2. Run `docker ps` and check the redis container port to optionally connect your desktop client to Redis @
+   localhost:<port>
+3. Run these [http requests](src/http/requests.http)
 
 ### Testing the application
 
-Run [SpringBootExamplesApplicationTest](src/test/java/com/att/training/springboot/examples/SpringBootExamplesApplicationTest.java)
+Run [SpringBootExamplesApplicationTest](src/test/java/com/att/training/springboot/examples/SpringCacheRedisApplicationTest.java)

@@ -1,0 +1,15 @@
+### Fetch user 1
+# run this multiple times withing the TTL defined in the cache
+GET http://localhost:8080/demo/users/1
+
+### Update user 1
+PUT http://localhost:8080/demo/users
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "John Doe"
+}
+
+### Delete user 1
+DELETE http://localhost:8080/demo/users/1
