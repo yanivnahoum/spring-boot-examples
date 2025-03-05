@@ -23,15 +23,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserRestClientComponentTest {
-    private static final int availablePort = TestSocketUtils.findAvailableTcpPort();
+    private static final int AVAILABLE_PORT = TestSocketUtils.findAvailableTcpPort();
     private MockWebServer mockWebServer;
     @Autowired
-    private UserRestClient userRestClient;
+    private UserRestClient userClient;
 
     @BeforeEach
     void setUp() throws IOException {
         mockWebServer = new MockWebServer();
-        mockWebServer.start(availablePort);
+        mockWebServer.start(AVAILABLE_PORT);
     }
 
     @AfterEach
@@ -41,7 +41,7 @@ class UserRestClientComponentTest {
 
     @DynamicPropertySource
     static void addProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.user.base-url", () -> "http://localhost:%d/api".formatted(availablePort));
+        registry.add("app.user.base-url", () -> "http://localhost:%d/api".formatted(AVAILABLE_PORT));
     }
 
     @Order(1)
@@ -74,7 +74,7 @@ class UserRestClientComponentTest {
                         """)
         );
 
-        var user = userRestClient.getUser(1);
+        var user = userClient.get(1);
 
         assertThat(user).isEqualTo(new User(1, "John"));
     }

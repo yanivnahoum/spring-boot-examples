@@ -42,13 +42,12 @@ class SpringCacheRedisApplicationTest {
     void givenUserId1_whenGetUserTwice_dbIsAccessedOnlyOnce() {
         int id = 1;
         var result = mockMvc.get()
-                .uri("/users/{id}", id)
-                .exchange();
+                .uri("/users/{id}", id);
+
         assertThat(result).hasStatus(OK);
 
         result = mockMvc.get()
-                .uri("/users/{id}", id)
-                .exchange();
+                .uri("/users/{id}", id);
 
         assertThat(result).hasStatus(OK);
         verify(userDao).findById(id);
@@ -65,15 +64,14 @@ class SpringCacheRedisApplicationTest {
         var result = mockMvc.put()
                 .uri("/users")
                 .content(updatedUser)
-                .contentType(APPLICATION_JSON)
-                .exchange();
+                .contentType(APPLICATION_JSON);
+
         assertThat(result).hasStatus(OK);
 
         result = mockMvc.put()
                 .uri("/users")
                 .content(updatedUser)
-                .contentType(APPLICATION_JSON)
-                .exchange();
+                .contentType(APPLICATION_JSON);
 
         assertThat(result).hasStatus(OK)
                 .bodyJson().isEqualTo(updatedUser);

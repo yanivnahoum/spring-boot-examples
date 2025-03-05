@@ -9,10 +9,11 @@ spring:
       fetch-size: 1000
 
   datasource:
-    url: jdbc:oracle:thin:@//192.168.106.2:15211,192.168.106.2:15212/XEPDB1
+    url: jdbc:oracle:thin:@//localhost:15211,192.168.106.2:15212/freepdb1
     username: oracle
     password: dummy
     hikari:
+      pool-name: oracle-pool
       maximum-pool-size: 2
       keepalive-time: 180000
       data-source-properties:

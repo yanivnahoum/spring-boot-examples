@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 class UserRestClientTest {
     private MockWebServer mockWebServer;
-    private UserRestClient userRestClient;
+    private UserRestClient userClient;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -27,7 +27,7 @@ class UserRestClientTest {
                 Duration.ofSeconds(1),
                 Duration.ofSeconds(1)
         );
-        userRestClient = new UserRestClient(RestClient.builder(), userClientProperties);
+        userClient = new UserRestClient(RestClient.builder(), userClientProperties);
     }
 
     @AfterEach
@@ -47,7 +47,7 @@ class UserRestClientTest {
                         """)
         );
 
-        var user = userRestClient.getUser(1);
+        var user = userClient.get(1);
 
         assertThat(user).isEqualTo(new User(1, "John"));
     }

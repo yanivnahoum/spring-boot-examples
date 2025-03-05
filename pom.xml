@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.2</version>
+        <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -19,14 +19,17 @@
         <revision>0.0.1-SNAPSHOT</revision>
         <java.version>21</java.version>
         <maven.compiler.enablePreview>true</maven.compiler.enablePreview>
-        <!--suppress UnresolvedMavenProperty -->
-        <argLine>--enable-preview -javaagent:${org.mockito:mockito-core:jar}</argLine>
+        <argLine>
+            --enable-preview
+            -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+            -Xshare:off
+        </argLine>
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
-        <spring-cloud-azure-dependencies.version>5.19.0</spring-cloud-azure-dependencies.version>
+        <spring-cloud-azure-dependencies.version>5.20.0</spring-cloud-azure-dependencies.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
         <mockwebserver.version>4.12.0</mockwebserver.version>
-        <testcontainers-redis.version>2.2.2</testcontainers-redis.version>
+        <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
     </properties>
 
     <dependencyManagement>
@@ -92,22 +95,6 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!--
-                                Sets a property pointing to the artifact file for each project dependency.
-                                Used for setting the javaagent property for Mockito in the argLine property.
-                            -->
-                            <goal>properties</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>

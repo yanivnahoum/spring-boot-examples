@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 class BadUserRestClientComponentTest {
     private static MockWebServer mockWebServer;
     @Autowired
-    private UserRestClient userRestClient;
+    private UserRestClient userClient;
 
     @BeforeAll
     static void setUp() throws IOException {
@@ -72,7 +72,7 @@ class BadUserRestClientComponentTest {
                         """)
         );
 
-        var user = userRestClient.getUser(1);
+        var user = userClient.get(1);
 
         // We get the wrong response here, left over from the previous test!
         assertThat(user).isNotEqualTo(new User(1, "John"))

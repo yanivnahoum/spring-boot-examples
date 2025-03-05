@@ -1,7 +1,6 @@
 services:
   oracle1:
-    image: ad833w518/oracle-db:19.3.0-arm
-    #    image: gvenzl/oracle-xe:slim-faststart
+    image: gvenzl/oracle-free:23-slim-faststart
     ports:
     - "15211:1521"
     volumes:
@@ -12,7 +11,7 @@ services:
       APP_USER_PASSWORD: dummy
 
   oracle2:
-    image: ad833w518/oracle-db:19.3.0-arm
+    image: gvenzl/oracle-free:23-slim-faststart
     ports:
     - "15212:1521"
     volumes:

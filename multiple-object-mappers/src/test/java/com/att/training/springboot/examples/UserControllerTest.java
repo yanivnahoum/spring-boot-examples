@@ -64,8 +64,7 @@ class UserControllerTest {
         var result = mockMvc.patch()
                 .uri("/users")
                 .contentType(APPLICATION_JSON)
-                .content(json)
-                .exchange();
+                .content(json);
 
         assertThat(result).hasStatus(expectedStatus);
     }
