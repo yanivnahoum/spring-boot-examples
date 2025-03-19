@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /service-bus
+
+spring:
+  cloud:
+    azure:
+      servicebus:
+        namespace: some-namespace
+        entity-name: some-queue
+        entity-type: queue

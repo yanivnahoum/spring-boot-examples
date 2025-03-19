@@ -1,0 +1,3 @@
+### Publish message to Service Bus
+POST http://localhost:8080/service-bus/publish?
+    message={{$random.alphanumeric(8)}}
