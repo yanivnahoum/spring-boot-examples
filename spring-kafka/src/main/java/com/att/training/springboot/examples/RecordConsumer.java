@@ -12,12 +12,12 @@ import static org.springframework.kafka.support.KafkaHeaders.GROUP_ID;
 @Slf4j
 public class RecordConsumer {
     @KafkaListener(topics = Kafka.MAIN_TOPIC)
-    public void consumeAsConsumerRecord(ConsumerRecord<?, ?> record) {
-        log.info("Consumed record: {}, headers: {}", record, record.headers());
+    public void consumeAsConsumerRecord(ConsumerRecord<?, ?> consumerRecord) {
+        log.info("Consumed consumerRecord: {}, headers: {}", consumerRecord, consumerRecord.headers());
     }
 
     @KafkaListener(topics = Kafka.MAIN_TOPIC, groupId = "spring-examples-kafka-string")
-    public void consumeAsString(String record, @Header(GROUP_ID) String groupId) {
-        log.info("Consumed record: {}, groupId: {} ", record, groupId);
+    public void consumeAsString(String payload, @Header(GROUP_ID) String groupId) {
+        log.info("Consumed payload: {}, groupId: {} ", payload, groupId);
     }
 }
