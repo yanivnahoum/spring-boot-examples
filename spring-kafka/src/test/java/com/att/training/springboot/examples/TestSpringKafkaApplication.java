@@ -21,7 +21,7 @@ class ContainersConfiguration {
     @ServiceConnection
     @Bean
     ConfluentKafkaContainer kafkaContainer() {
-        return new ConfluentKafkaContainer("confluentinc/cp-kafka:7.8.0");
+        return new ConfluentKafkaContainer("confluentinc/cp-kafka:7.9.1");
     }
 
     @Bean
