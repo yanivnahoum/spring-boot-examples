@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /examples
+    context-path: /kafka
 
 management:
   server:

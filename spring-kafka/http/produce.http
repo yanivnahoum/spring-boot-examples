@@ -1,1 +1,5 @@
-PUT http://localhost:8080/examples/kafka/produce/1
+PUT http://localhost:8080/kafka/produce/101
+
+
+### Readiness
+GET http://localhost:8080/kafka/readyz
