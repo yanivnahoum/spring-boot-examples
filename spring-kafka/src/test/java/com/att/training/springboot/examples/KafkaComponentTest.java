@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
-import java.time.Duration;
-
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 import static org.mockito.Mockito.verify;
@@ -34,8 +33,9 @@ class KafkaComponentTest {
         var response = mockMvc.put()
                 .uri("/produce/{payload}", payload)
                 .exchange();
+
         assertThat(response).hasStatus(ACCEPTED);
-        await().atMost(Duration.ofSeconds(3)).untilAsserted(() ->
+        await().atMost(3, SECONDS).untilAsserted(() ->
                 verify(recordProcessor).process(payload, groupId)
         );
     }
