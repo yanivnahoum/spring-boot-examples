@@ -1,0 +1,11 @@
+PUT http://localhost:8080/kafka/produce
+Content-Type: application/json
+
+{
+  "code": "P9999",
+  "price": "9.99"
+}
+
+
+### Readiness
+GET http://localhost:8080/kafka/readyz

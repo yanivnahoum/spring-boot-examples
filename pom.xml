@@ -48,6 +48,7 @@
         <module>context-propagation</module>
         <module>spring-concurrency</module>
         <module>spring-kafka</module>
+        <module>spring-kafka-postgres</module>
         <module>spring-properties</module>
         <module>structured-logging</module>
         <module>http-clients</module>
