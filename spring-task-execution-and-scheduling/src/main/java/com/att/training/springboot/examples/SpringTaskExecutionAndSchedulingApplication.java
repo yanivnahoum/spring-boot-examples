@@ -20,8 +20,8 @@ import java.lang.annotation.Target;
 /**
  * When task scheduling is enabled (via @EnableScheduling) we have 2 TaskExecutor beans: </br>
  * <ol>
- *     <li>applicationTaskExecutor: defined by method 'applicationTaskExecutor' in TaskExecutorConfigurations$TaskExecutorConfiguration</li>
- *     <li>taskScheduler: defined by method 'taskScheduler' in TaskSchedulingConfigurations$TaskSchedulerConfiguration</li>
+ *     <li>applicationTaskExecutor: defined by method 'applicationTaskExecutor' in TaskExecutorConfigurations.TaskExecutorConfiguration</li>
+ *     <li>taskScheduler: defined by method 'taskScheduler' in TaskSchedulingConfigurations.TaskSchedulerConfiguration</li>
  * </ol>
  * In order to inject the TaskExecutor bean, we can use the following approaches:
  *
