@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%clr(%d){faint} %clr(%-5level) %clr(%thread){magenta} %clr(%logger{20}){cyan} %msg %clr(%mdc){blue}%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.azure.core" level="warn"/>
+    <logger name="org.apache.hc.client5.http" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
