@@ -1,8 +1,8 @@
 package com.att.training.springboot.examples;
 
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import org.junit.jupiter.api.AfterEach;
+import mockwebserver3.MockResponse;
+import mockwebserver3.MockWebServer;
+import org.junit.jupiter.api.AutoClose;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestClient;
@@ -15,6 +15,7 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 class UserRestClientTest {
+    @AutoClose
     private MockWebServer mockWebServer;
     private UserRestClient userClient;
 
@@ -30,21 +31,17 @@ class UserRestClientTest {
         userClient = new UserRestClient(RestClient.builder(), userClientProperties);
     }
 
-    @AfterEach
-    void tearDown() throws IOException {
-        mockWebServer.shutdown();
-    }
-
     @Test
     void givenUserJohn_whenGetUser_thenReturnJohn() {
-        mockWebServer.enqueue(new MockResponse()
-                .setHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .setBody("""
+        mockWebServer.enqueue(new MockResponse.Builder()
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                .body("""
                         {
                             "id": 1,
                             "name": "John"
                         }
                         """)
+                .build()
         );
 
         var user = userClient.get(1);

@@ -1,8 +1,8 @@
 package com.att.training.springboot.examples;
 
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import org.junit.jupiter.api.AfterEach;
+import mockwebserver3.MockResponse;
+import mockwebserver3.MockWebServer;
+import org.junit.jupiter.api.AutoClose;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -24,6 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserRestClientComponentTest {
     private static final int AVAILABLE_PORT = TestSocketUtils.findAvailableTcpPort();
+    @AutoClose
     private MockWebServer mockWebServer;
     @Autowired
     private UserRestClient userClient;
@@ -34,28 +35,24 @@ class UserRestClientComponentTest {
         mockWebServer.start(AVAILABLE_PORT);
     }
 
-    @AfterEach
-    void tearDown() throws IOException {
-        mockWebServer.shutdown();
-    }
-
     @DynamicPropertySource
     static void addProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.user.base-url", () -> "http://localhost:%d/api".formatted(AVAILABLE_PORT));
+        registry.add("app.user.base-url", () -> "http://localhost:%d".formatted(AVAILABLE_PORT));
     }
 
     @Order(1)
     @Test
     @SuppressWarnings("java:S2699")
     void givenUserJane_leaveResponseQueued() {
-        mockWebServer.enqueue(new MockResponse()
-                .setHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .setBody("""
+        mockWebServer.enqueue(new MockResponse.Builder()
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                .body("""
                         {
                             "id": 2,
                             "name": "Jane"
                         }
                         """)
+                .build()
         );
 
         // We then run some code that throws an exception or fails to dequeue the response
@@ -64,14 +61,15 @@ class UserRestClientComponentTest {
     @Order(2)
     @Test
     void givenUserJohn_whenGetUser_thenReturnJohn() {
-        mockWebServer.enqueue(new MockResponse()
-                .setHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .setBody("""
+        mockWebServer.enqueue(new MockResponse.Builder()
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                .body("""
                         {
                             "id": 1,
                             "name": "John"
                         }
                         """)
+                .build()
         );
 
         var user = userClient.get(1);
