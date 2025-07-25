@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("users")
 @RequiredArgsConstructor
 public class UserController {
-    public final UserDao userDao;
+    private final UserDao userDao;
 
     @GetMapping
     public List<User> findAll() {
