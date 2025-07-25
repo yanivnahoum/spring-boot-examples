@@ -1,0 +1,25 @@
+server:
+  servlet:
+    context-path: /event-hubs
+
+spring:
+  cloud:
+    azure:
+      eventhubs:
+        namespace: some-namespace.windows.net
+        event-hub-name: some-hub
+        processor:
+          consumer-group: default
+
+  output:
+    ansi:
+      enabled: always
+
+management:
+  health:
+    azure-eventhubs:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
