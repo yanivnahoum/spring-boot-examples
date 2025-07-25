@@ -27,7 +27,7 @@ public class EventHubProcessorClientConfiguration {
 
     @Bean
     public CommandLineRunner startProcessor(EventProcessorClient eventProcessorClient) {
-        return args -> {
+        return _ -> {
             eventProcessorClient.start();
             SECONDS.sleep(5); // Allow some time for the processor to start
         };
