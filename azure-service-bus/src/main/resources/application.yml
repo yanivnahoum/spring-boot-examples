@@ -9,3 +9,9 @@ spring:
         namespace: some-namespace
         entity-name: some-queue
         entity-type: queue
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
