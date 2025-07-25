@@ -21,7 +21,7 @@ public abstract class ServiceBusContainer {
                 .withNetwork(network);
         mssql.start();
 
-        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:1.0.1")
+        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:1.1.2")
                 .acceptLicense()
                 .withConfig(MountableFile.forClasspathResource("/service-bus-config.json"))
                 .withNetwork(network)
