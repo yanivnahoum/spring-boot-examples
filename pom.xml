@@ -59,6 +59,7 @@
         <module>spring-cache-redis</module>
         <module>multiple-object-mappers</module>
         <module>azure-service-bus</module>
+        <module>azure-event-hubs</module>
         <module>spring-task-execution-and-scheduling</module>
     </modules>
 
