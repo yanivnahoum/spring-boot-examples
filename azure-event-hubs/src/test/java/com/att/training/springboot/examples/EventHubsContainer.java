@@ -22,7 +22,7 @@ public abstract class EventHubsContainer {
 
     private static EventHubsEmulatorContainer buildAndStart() {
         Network network = Network.newNetwork();
-        azurite = new AzuriteContainer("mcr.microsoft.com/azure-storage/azurite:3.34.0")
+        azurite = new AzuriteContainer("mcr.microsoft.com/azure-storage/azurite:3.35.0")
                 .withNetwork(network);
         azurite.start();
 
