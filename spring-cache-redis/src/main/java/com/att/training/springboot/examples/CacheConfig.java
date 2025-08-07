@@ -38,6 +38,10 @@ public class CacheConfig {
             var valueSerializationPair = SerializationPair.fromSerializer(serializer);
             // Simpler option for a single POJO to serialize/deserialize in Redis:
             // var valueSerializationPair = SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(objectMapper, MyOnlyPojo.class));
+            // Or for generic types:
+            // var javaType = TypeFactory.defaultInstance().constructType(new TypeReference<List<User>>() {});
+            // var jsonRedisSerializer = new Jackson2JsonRedisSerializer<>(objectMapper, javaType)
+            // var valueSerializationPair = SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(objectMapper, javaType));
             var redisCacheConfiguration = builder.cacheDefaults().serializeValuesWith(valueSerializationPair);
             builder.cacheDefaults(redisCacheConfiguration);
         };
