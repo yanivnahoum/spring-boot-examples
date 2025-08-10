@@ -1,5 +1,6 @@
 package com.att.training.springboot.examples;
 
+import io.micrometer.observation.ObservationRegistry;
 import mockwebserver3.MockResponse;
 import mockwebserver3.MockWebServer;
 import org.junit.jupiter.api.AutoClose;
@@ -26,9 +27,11 @@ class UserRestClientTest {
         UserClientProperties userClientProperties = new UserClientProperties(
                 mockWebServer.url("/api").toString(),
                 Duration.ofSeconds(1),
-                Duration.ofSeconds(1)
+                Duration.ofSeconds(1),
+                5,
+                25
         );
-        userClient = new UserRestClient(RestClient.builder(), userClientProperties);
+        userClient = new UserRestClient(RestClient.builder(), userClientProperties, ObservationRegistry.NOOP);
     }
 
     @Test

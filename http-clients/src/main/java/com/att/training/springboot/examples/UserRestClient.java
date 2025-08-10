@@ -1,8 +1,10 @@
 package com.att.training.springboot.examples;
 
+import io.micrometer.observation.ObservationRegistry;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.core5.util.TimeValue;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
@@ -24,11 +26,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class UserRestClient {
     private final RestClient restClient;
 
-    public UserRestClient(RestClient.Builder restClientBuilder, UserClientProperties userClientProperties) {
+    public UserRestClient(RestClient.Builder restClientBuilder, UserClientProperties userClientProperties,
+                          ObservationRegistry observationRegistry) {
         this.restClient = restClientBuilder
                 .baseUrl(userClientProperties.baseUrl())
                 .requestFactory(buildRequestFactory(userClientProperties))
                 .defaultStatusHandler(HttpStatusCode::isError, this::handleError)
+                .observationRegistry(observationRegistry)
                 .build();
     }
 
@@ -44,7 +48,13 @@ public class UserRestClient {
         var retryStrategy = new DefaultHttpRequestRetryStrategy(3, TimeValue.ofSeconds(1));
         return ClientHttpRequestFactoryBuilder.httpComponents()
                 .withHttpClientCustomizer(httpClient -> httpClient.setRetryStrategy(retryStrategy))
+                .withConnectionManagerCustomizer(pool -> customizeConnectionPool(pool, userClientProperties))
                 .build(requestFactorySettings);
+    }
+
+    private void customizeConnectionPool(PoolingHttpClientConnectionManagerBuilder pool, UserClientProperties userClientProperties) {
+        pool.setMaxConnPerRoute(userClientProperties.maxConnectionsPerRoute());
+        pool.setMaxConnTotal(userClientProperties.maxConnectionsTotal());
     }
 
     public User get(long id) {

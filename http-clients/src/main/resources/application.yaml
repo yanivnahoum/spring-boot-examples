@@ -7,3 +7,5 @@ spring:
 app:
   user:
     base-url: http://localhost:8088
+    max-connections-per-route: 20
+    max-connections-total: 60
