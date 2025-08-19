@@ -15,7 +15,7 @@ import static org.awaitility.Awaitility.await;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.kafka.consumer.auto-offset-reset=earliest")
 @WithKafka
 @AutoConfigureMockMvc
 class KafkaComponentTest {
