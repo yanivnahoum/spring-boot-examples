@@ -10,7 +10,7 @@
     <logger name="com.zaxxer.hikari" level="debug"/>
     <logger name="org.springframework.jdbc.support.JdbcTransactionManager" level="debug"/>
     <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="debug"/>
-
+    <logger name="net.ttddyy.dsproxy.listener" level="debug"/>
 
     <root level="info">
         <appender-ref ref="stdout"/>

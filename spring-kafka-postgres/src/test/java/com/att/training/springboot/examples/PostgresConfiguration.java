@@ -18,7 +18,7 @@ class PostgresConfiguration {
     @Bean
     @SuppressWarnings("resource")
     PostgreSQLContainer<?> postgresContainer() {
-        return new PostgreSQLContainer<>("postgres:16.8")
+        return new PostgreSQLContainer<>("postgres:16.9")
                 .withDatabaseName("catalog");
     }
 }

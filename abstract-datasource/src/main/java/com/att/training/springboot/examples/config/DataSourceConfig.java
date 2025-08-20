@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class DataSourceConfig {
 
     @Bean
     @ConfigurationProperties("app.datasource.east.hikari")
-    public HikariDataSource eastDataSource() {
+    public DataSource eastDataSource() {
         return buildDataSource(eastDataSourceProperties());
     }
 
@@ -58,7 +59,7 @@ public class DataSourceConfig {
 
     @Bean
     @ConfigurationProperties("app.datasource.west.hikari")
-    public HikariDataSource westDataSource() {
+    public DataSource westDataSource() {
         return buildDataSource(westDataSourceProperties());
     }
 

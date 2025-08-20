@@ -46,3 +46,10 @@ spring:
     execution:
       simple:
         concurrency-limit: 100
+
+decorator:
+  datasource:
+    ignore-routing-data-sources: true
+    datasource-proxy:
+      slow-query:
+        threshold: 30s

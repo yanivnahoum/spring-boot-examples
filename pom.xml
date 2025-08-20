@@ -31,6 +31,7 @@
         <mockwebserver.version>5.1.0</mockwebserver.version>
         <redisson.version>3.50.0</redisson.version>
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
+        <datasource-decorator.version>1.12.0</datasource-decorator.version>
     </properties>
 
     <dependencyManagement>
