@@ -12,6 +12,7 @@
     <logger name="com.azure.spring.cloud" level="trace"/>
     <logger name="com.azure.data.appconfiguration" level="trace"/>
     <logger name="org.springframework.cloud" level="debug"/>
+    <logger name="org.springframework.boot.context.config" level="trace"/>
 
     <root level="info">
         <appender-ref ref="stdout"/>
