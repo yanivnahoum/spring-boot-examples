@@ -2,7 +2,10 @@
 <included>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-        <if condition='isDefined("KUBERNETES_SERVICE_HOST")'>
+        <condition class="ch.qos.logback.core.boolex.IsPropertyDefinedCondition">
+            <key>KUBERNETES_SERVICE_HOST</key>
+        </condition>
+        <if>
             <then>
                 <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
                     <providers>
