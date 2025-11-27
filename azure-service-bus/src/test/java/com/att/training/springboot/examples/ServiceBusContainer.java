@@ -16,7 +16,7 @@ public abstract class ServiceBusContainer {
     private static ServiceBusEmulatorContainer buildAndStart() {
         var network = Network.newNetwork();
 
-        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2022-CU20-ubuntu-22.04")
+        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2022-CU22-ubuntu-22.04")
                 .acceptLicense()
                 .withNetwork(network);
         mssql.start();

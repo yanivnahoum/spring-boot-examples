@@ -1,7 +1,26 @@
+spring:
+  config:
+    import: azureAppConfiguration
+  cloud:
+    azure:
+      appconfiguration:
+        #        enabled: ${azure.appconfig.enabled:false}
+        stores:
+        - connection-string: ${azure.appconfig.connection-string}
+          enabled: ${azure.appconfig.enabled:true}
+          feature-flags:
+            enabled: true
+            selects:
+            - label-filter: ',${spring.profiles.active}'
+          monitoring:
+            feature-flag-refresh-interval: 10s
+
 ---
 spring:
   config:
     activate:
       on-profile: default
 feature-management:
-  feature1: true
+  feature-flags:
+  - id: feature111
+    enabled: true
