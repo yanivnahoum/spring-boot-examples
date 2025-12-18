@@ -1,11 +1,12 @@
 package com.att.training.springboot.examples;
 
-import io.micrometer.observation.ObservationRegistry;
 import mockwebserver3.MockResponse;
 import mockwebserver3.MockWebServer;
 import org.junit.jupiter.api.AutoClose;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
+import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
 import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
@@ -31,7 +32,8 @@ class UserRestClientTest {
                 5,
                 25
         );
-        userClient = new UserRestClient(RestClient.builder(), userClientProperties, ObservationRegistry.NOOP);
+        userClient = new UserRestClient(RestClient.builder(), userClientProperties,
+                ClientHttpRequestFactoryBuilder.httpComponents(), ClientHttpRequestFactorySettings.defaults());
     }
 
     @Test

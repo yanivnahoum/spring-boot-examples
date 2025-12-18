@@ -1,13 +1,10 @@
 package com.att.training.springboot.examples;
 
-import io.micrometer.observation.ObservationRegistry;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
-import org.apache.hc.core5.util.TimeValue;
-import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.HttpComponentsClientHttpRequestFactoryBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatusCode;
@@ -27,29 +24,26 @@ public class UserRestClient {
     private final RestClient restClient;
 
     public UserRestClient(RestClient.Builder restClientBuilder, UserClientProperties userClientProperties,
-                          ObservationRegistry observationRegistry) {
+                          HttpComponentsClientHttpRequestFactoryBuilder requestFactoryBuilder,
+                          ClientHttpRequestFactorySettings requestFactorySettings) {
         this.restClient = restClientBuilder
                 .baseUrl(userClientProperties.baseUrl())
-                .requestFactory(buildRequestFactory(userClientProperties))
+                .requestFactory(buildRequestFactory(requestFactoryBuilder, requestFactorySettings, userClientProperties))
                 .defaultStatusHandler(HttpStatusCode::isError, this::handleError)
-                .observationRegistry(observationRegistry)
                 .build();
+    }
+
+    private ClientHttpRequestFactory buildRequestFactory(HttpComponentsClientHttpRequestFactoryBuilder requestFactoryBuilder,
+                                                         ClientHttpRequestFactorySettings requestFactorySettings,
+                                                         UserClientProperties userClientProperties) {
+        var modifiedSettings = requestFactorySettings.withConnectTimeout(userClientProperties.connectTimeout())
+                .withReadTimeout(userClientProperties.readTimeout());
+        return requestFactoryBuilder.build(modifiedSettings);
     }
 
     @SneakyThrows(IOException.class)
     private void handleError(HttpRequest httpRequest, ClientHttpResponse clientHttpResponse) {
         throw new MyCustomException(httpRequest.getURI(), clientHttpResponse.getStatusCode());
-    }
-
-    private ClientHttpRequestFactory buildRequestFactory(UserClientProperties userClientProperties) {
-        var requestFactorySettings = ClientHttpRequestFactorySettings.defaults()
-                .withConnectTimeout(userClientProperties.connectTimeout())
-                .withReadTimeout(userClientProperties.readTimeout());
-        var retryStrategy = new DefaultHttpRequestRetryStrategy(3, TimeValue.ofSeconds(1));
-        return ClientHttpRequestFactoryBuilder.httpComponents()
-                .withHttpClientCustomizer(httpClient -> httpClient.setRetryStrategy(retryStrategy))
-                .withConnectionManagerCustomizer(pool -> customizeConnectionPool(pool, userClientProperties))
-                .build(requestFactorySettings);
     }
 
     private void customizeConnectionPool(PoolingHttpClientConnectionManagerBuilder pool, UserClientProperties userClientProperties) {
