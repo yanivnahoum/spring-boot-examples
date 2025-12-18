@@ -26,7 +26,8 @@ class EventHubsAppTest extends EventHubsContainer {
     void testApp() {
         var response = mockMvc.post()
                 .uri("/publish")
-                .param("message", "Hello World!");
+                .param("message", "Hello World!")
+                .exchange();
 
         assertThat(response).hasStatus2xxSuccessful();
         await().atMost(5, SECONDS).untilAsserted(
