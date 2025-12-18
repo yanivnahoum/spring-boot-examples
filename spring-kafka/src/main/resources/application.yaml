@@ -22,6 +22,9 @@ management:
           include: readinessState, kafka
 spring:
   kafka:
+    listener:
+      concurrency: 1
+      auto-startup: true
     bootstrap-servers: localhost:9092
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
