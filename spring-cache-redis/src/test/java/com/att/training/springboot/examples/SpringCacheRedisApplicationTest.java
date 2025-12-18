@@ -77,4 +77,20 @@ class SpringCacheRedisApplicationTest {
                 .bodyJson().isEqualTo(updatedUser);
         verify(userDao, never()).findById(id);
     }
+
+    @Test
+    void givenUserIds123_whenGetUsersTwice_dbIsAccessedOnlyOncePerId() {
+        var result = mockMvc.get()
+                .uri("/users?ids=1,2,3");
+
+        assertThat(result).hasStatus(OK);
+
+        result = mockMvc.get()
+                .uri("/users?ids=1,2,3");
+
+        assertThat(result).hasStatus(OK);
+        verify(userDao).findById(1);
+        verify(userDao).findById(2);
+        verify(userDao).findById(3);
+    }
 }

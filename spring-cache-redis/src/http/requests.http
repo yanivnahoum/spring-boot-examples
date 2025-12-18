@@ -2,6 +2,13 @@
 # run this multiple times withing the TTL defined in the cache
 GET http://localhost:8080/demo/users/1
 
+### Fetch multiple users
+# run this multiple times withing the TTL defined in the cache
+GET http://localhost:8080/demo/users?ids=1,2,3
+
+### Fetch multiple users - invalid request (empty ids)
+GET http://localhost:8080/demo/users
+
 ### Update user 1
 PUT http://localhost:8080/demo/users
 Content-Type: application/json
