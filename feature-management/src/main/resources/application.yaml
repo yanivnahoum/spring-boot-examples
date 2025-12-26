@@ -4,10 +4,9 @@ spring:
   cloud:
     azure:
       appconfiguration:
-        #        enabled: ${azure.appconfig.enabled:false}
+        enabled: ${azure.appconfig.enabled:false}
         stores:
         - connection-string: ${azure.appconfig.connection-string}
-          enabled: ${azure.appconfig.enabled:true}
           feature-flags:
             enabled: true
             selects:
@@ -19,7 +18,8 @@ spring:
 spring:
   config:
     activate:
-      on-profile: default
+      on-profile: local
+
 feature-management:
   feature-flags:
   - id: feature111

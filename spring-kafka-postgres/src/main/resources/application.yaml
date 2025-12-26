@@ -18,7 +18,10 @@ management:
         add-additional-paths: true
       group:
         readiness:
-          include: readinessState, kafka, db
+          include:
+          - readinessState
+          - kafka
+          - db
 
 spring:
   datasource:
@@ -40,6 +43,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         "[spring.json.trusted.packages]": com.att.training.springboot.examples
+      bootstrap-servers:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
