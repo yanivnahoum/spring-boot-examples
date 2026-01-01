@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.azure.core" level="warn"/>
+    <logger name="com.azure.core.amqp" level="error"/>
 
     <root level="info">
         <appender-ref ref="stdout"/>
