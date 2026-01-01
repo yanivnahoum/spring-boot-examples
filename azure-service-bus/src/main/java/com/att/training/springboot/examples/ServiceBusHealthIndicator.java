@@ -4,8 +4,9 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.messaging.servicebus.administration.ServiceBusAdministrationClient;
 import com.azure.messaging.servicebus.administration.ServiceBusAdministrationClientBuilder;
 import com.azure.spring.cloud.autoconfigure.implementation.servicebus.properties.AzureServiceBusProperties;
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health;
+import org.jspecify.annotations.NonNull;
+import org.springframework.boot.health.contributor.AbstractHealthIndicator;
+import org.springframework.boot.health.contributor.Health;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,7 +23,7 @@ public class ServiceBusHealthIndicator extends AbstractHealthIndicator {
     }
 
     @Override
-    protected void doHealthCheck(Health.Builder builder) {
+    protected void doHealthCheck(Health.@NonNull Builder builder) {
         var namespaceProperties = serviceBusAdministrationClient.getNamespaceProperties();
         if (namespaceProperties != null) {
             builder.up().withDetail("namespace", namespaceProperties.getName());

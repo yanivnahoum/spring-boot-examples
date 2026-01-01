@@ -1,10 +1,10 @@
 package com.att.training.springboot.examples.config;
 
 import com.att.training.springboot.examples.db.DbContext;
+import org.jspecify.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskDecorator;
-import org.springframework.lang.NonNull;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration(proxyBeanMethods = false)

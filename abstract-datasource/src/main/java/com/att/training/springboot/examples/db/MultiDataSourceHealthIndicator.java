@@ -4,9 +4,10 @@ import com.github.gavlyukovskiy.boot.jdbc.decorator.DecoratedDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.Status;
+import org.jspecify.annotations.NonNull;
+import org.springframework.boot.health.contributor.AbstractHealthIndicator;
+import org.springframework.boot.health.contributor.Health;
+import org.springframework.boot.health.contributor.Status;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class MultiDataSourceHealthIndicator extends AbstractHealthIndicator {
     private final List<DataSource> dataSources;
 
     @Override
-    protected void doHealthCheck(Health.Builder builder) {
+    protected void doHealthCheck(Health.@NonNull Builder builder) {
         boolean allValid = true;
         for (var dataSource : dataSources) {
             if (dataSource instanceof AbstractRoutingDataSource) continue;

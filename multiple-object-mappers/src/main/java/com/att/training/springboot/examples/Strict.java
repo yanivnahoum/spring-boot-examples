@@ -1,7 +1,7 @@
 package com.att.training.springboot.examples;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Qualifies a strict {@link ObjectMapper}, one that fails
+ * Qualifies a strict {@link JsonMapper}, one that fails
  * on deserialization of unknown properties.
  */
 @Target({FIELD, PARAMETER, METHOD})

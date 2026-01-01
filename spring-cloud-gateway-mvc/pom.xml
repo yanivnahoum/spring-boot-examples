@@ -15,6 +15,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
+            <version>4.2.0</version>
         </dependency>
 
         <dependency>

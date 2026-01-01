@@ -14,7 +14,6 @@ management:
   endpoint:
     health:
       probes:
-        enabled: true
         add-additional-paths: true
       group:
         readiness:
@@ -40,13 +39,12 @@ spring:
     consumer:
       group-id: spring-examples-kafka
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
       properties:
         "[spring.json.trusted.packages]": com.att.training.springboot.examples
-      bootstrap-servers:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       retries: 3
 
   output:

@@ -3,7 +3,6 @@ package com.att.training.springboot.examples;
 import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.core5.util.TimeValue;
-import org.springframework.boot.autoconfigure.http.client.ClientHttpRequestFactoryBuilderCustomizer;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.HttpComponentsClientHttpRequestFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +22,10 @@ public class RestClientConfig {
 
     // Another option:
     //@Bean
-    public ClientHttpRequestFactoryBuilderCustomizer<HttpComponentsClientHttpRequestFactoryBuilder> customizer() {
-        return builder -> builder.withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
-                .withConnectionManagerCustomizer(this::customizeConnectionPool);
-    }
+    //public ClientHttpRequestFactoryBuilderCustomizer<HttpComponentsClientHttpRequestFactoryBuilder> customizer() {
+    //    return builder -> builder.withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
+    //            .withConnectionManagerCustomizer(this::customizeConnectionPool);
+    //}
 
     private void customizeConnectionPool(PoolingHttpClientConnectionManagerBuilder pool) {
         pool.setDefaultConnectionConfig(ConnectionConfig.custom()

@@ -2,8 +2,7 @@ package com.att.training.springboot.examples;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
-import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.boot.http.client.HttpComponentsClientHttpRequestFactoryBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpRequest;
@@ -25,7 +24,7 @@ public class UserRestClient {
 
     public UserRestClient(RestClient.Builder restClientBuilder, UserClientProperties userClientProperties,
                           HttpComponentsClientHttpRequestFactoryBuilder requestFactoryBuilder,
-                          ClientHttpRequestFactorySettings requestFactorySettings) {
+                          HttpClientSettings requestFactorySettings) {
         this.restClient = restClientBuilder
                 .baseUrl(userClientProperties.baseUrl())
                 .requestFactory(buildRequestFactory(requestFactoryBuilder, requestFactorySettings, userClientProperties))
@@ -34,7 +33,7 @@ public class UserRestClient {
     }
 
     private ClientHttpRequestFactory buildRequestFactory(HttpComponentsClientHttpRequestFactoryBuilder requestFactoryBuilder,
-                                                         ClientHttpRequestFactorySettings requestFactorySettings,
+                                                         HttpClientSettings requestFactorySettings,
                                                          UserClientProperties userClientProperties) {
         var modifiedSettings = requestFactorySettings.withConnectTimeout(userClientProperties.connectTimeout())
                 .withReadTimeout(userClientProperties.readTimeout());
@@ -44,11 +43,6 @@ public class UserRestClient {
     @SneakyThrows(IOException.class)
     private void handleError(HttpRequest httpRequest, ClientHttpResponse clientHttpResponse) {
         throw new MyCustomException(httpRequest.getURI(), clientHttpResponse.getStatusCode());
-    }
-
-    private void customizeConnectionPool(PoolingHttpClientConnectionManagerBuilder pool, UserClientProperties userClientProperties) {
-        pool.setMaxConnPerRoute(userClientProperties.maxConnectionsPerRoute());
-        pool.setMaxConnTotal(userClientProperties.maxConnectionsTotal());
     }
 
     public User get(long id) {

@@ -4,8 +4,9 @@ import jakarta.annotation.PreDestroy;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.AdminClient;
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health;
+import org.jspecify.annotations.NonNull;
+import org.springframework.boot.health.contributor.AbstractHealthIndicator;
+import org.springframework.boot.health.contributor.Health;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class KafkaHealthIndicator extends AbstractHealthIndicator {
 
     @Override
     @SneakyThrows({InterruptedException.class, ExecutionException.class})
-    protected void doHealthCheck(Health.Builder builder) {
+    protected void doHealthCheck(Health.@NonNull Builder builder) {
         var topicNames = adminClient.listTopics().names().get();
         if (topicNames.isEmpty()) {
             log.warn("#doHealthCheck - KafkaTopicNames topics missing!");

@@ -3,10 +3,10 @@ package com.att.training.springboot.examples.config;
 import com.att.training.springboot.examples.db.DbRegion;
 import com.att.training.springboot.examples.db.DynamicRoutingDataSource;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer;
-import org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.autoconfigure.ApplicationDataSourceScriptDatabaseInitializer;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
+import org.springframework.boot.sql.autoconfigure.init.SqlInitializationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -47,8 +47,8 @@ public class DataSourceConfig {
     }
 
     @Bean
-    public SqlDataSourceScriptDatabaseInitializer eastScriptDatabaseInitializer() {
-        return new SqlDataSourceScriptDatabaseInitializer(eastDataSource(), sqlInitializationProperties);
+    public ApplicationDataSourceScriptDatabaseInitializer eastScriptDatabaseInitializer() {
+        return new ApplicationDataSourceScriptDatabaseInitializer(eastDataSource(), sqlInitializationProperties);
     }
 
     @Bean
@@ -64,8 +64,8 @@ public class DataSourceConfig {
     }
 
     @Bean
-    public SqlDataSourceScriptDatabaseInitializer westScriptDatabaseInitializer() {
-        return new SqlDataSourceScriptDatabaseInitializer(westDataSource(), sqlInitializationProperties);
+    public ApplicationDataSourceScriptDatabaseInitializer westScriptDatabaseInitializer() {
+        return new ApplicationDataSourceScriptDatabaseInitializer(westDataSource(), sqlInitializationProperties);
     }
 
     private HikariDataSource buildDataSource(DataSourceProperties dataSourceProperties) {

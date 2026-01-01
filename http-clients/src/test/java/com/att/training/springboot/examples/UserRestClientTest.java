@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AutoClose;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
-import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ class UserRestClientTest {
                 25
         );
         userClient = new UserRestClient(RestClient.builder(), userClientProperties,
-                ClientHttpRequestFactoryBuilder.httpComponents(), ClientHttpRequestFactorySettings.defaults());
+                ClientHttpRequestFactoryBuilder.httpComponents(), HttpClientSettings.defaults());
     }
 
     @Test

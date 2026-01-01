@@ -22,6 +22,7 @@ public class ProductDao {
                 .update();
     }
 
+    // region findByCodeOrNull
     public Product findByCodeOrNull(String code) {
         return jdbcClient.sql("""
                         SELECT code, name, price
@@ -33,6 +34,7 @@ public class ProductDao {
                 .optional()
                 .orElse(null);
     }
+    // endregion
 
     public void updatePrice(String code, BigDecimal price) {
         int affectedRows = jdbcClient.sql("""

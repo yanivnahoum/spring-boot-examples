@@ -1,6 +1,6 @@
 package com.att.training.springboot.examples;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 
 public class UserRestTemplate {

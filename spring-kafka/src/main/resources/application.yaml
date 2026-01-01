@@ -15,7 +15,6 @@ management:
     health:
       show-details: always
       probes:
-        enabled: true
         add-additional-paths: true
       group:
         readiness:

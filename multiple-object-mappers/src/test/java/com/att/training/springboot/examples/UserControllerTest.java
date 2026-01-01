@@ -1,17 +1,17 @@
 package com.att.training.springboot.examples;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.DatabindException;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.stream.Stream;
 
@@ -38,15 +38,15 @@ class UserControllerTest {
             }
             """;
     @Autowired
-    private ObjectMapper defaultObjectMapper;
+    private JsonMapper defaultObjectMapper;
     @Strict
     @Autowired
-    private ObjectMapper strictObjectMapper;
+    private JsonMapper strictObjectMapper;
     @Autowired
     private MockMvcTester mockMvc;
 
     @Test
-    void givenUserWithUnknownProperty_whenDeserializingUsingDefaultMapper_thenSucceed() throws JsonProcessingException {
+    void givenUserWithUnknownProperty_whenDeserializingUsingDefaultMapper_thenSucceed() throws JacksonException {
         var user = defaultObjectMapper.readValue(JSON_WITH_UNKNOWN_PROPERTY, User.class);
         assertThat(user).isEqualTo(new User(1, "John"));
     }
@@ -54,8 +54,8 @@ class UserControllerTest {
     @Test
     void givenUserWithUnknownProperty_whenDeserializingUsingStrictMapper_thenFailWithJsonMappingException() {
         assertThatThrownBy(() -> strictObjectMapper.readValue(JSON_WITH_UNKNOWN_PROPERTY, User.class))
-                .isInstanceOf(JsonMappingException.class)
-                .hasMessageContaining("Unrecognized field \"age\"");
+                .isInstanceOf(DatabindException.class)
+                .hasMessageContaining("Unrecognized property \"age\"");
     }
 
     @ParameterizedTest
