@@ -7,8 +7,11 @@ import org.springframework.boot.task.ThreadPoolTaskExecutorBuilder;
 import org.springframework.boot.task.ThreadPoolTaskExecutorCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskDecorator;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import java.util.concurrent.ThreadPoolExecutor;
 
 @EnableAsync
 @Configuration(proxyBeanMethods = false)
@@ -16,7 +19,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class AsyncConfig {
     @Bean
     ThreadPoolTaskExecutorCustomizer taskExecutorCustomizer() {
-        return taskExecutor -> taskExecutor.setTaskDecorator(AsyncConfig::propagateContext);
+        return taskExecutor ->
+                taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+    }
+
+    @Bean
+    TaskDecorator taskDecorator() {
+        return AsyncConfig::propagateContext;
     }
 
     private static Runnable propagateContext(Runnable runnable) {
@@ -39,8 +48,7 @@ public class AsyncConfig {
         @Bean(defaultCandidate = false)
         TaskExecutor ioTaskExecutor() {
             return new ThreadPoolTaskExecutorBuilder()
-                    .corePoolSize(8)
-                    .maxPoolSize(8)
+                    .corePoolSize(10)
                     .threadNamePrefix("io-pool-")
                     .taskDecorator(AsyncConfig::propagateContext)
                     .build();

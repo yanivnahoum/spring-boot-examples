@@ -2,7 +2,7 @@ spring:
   task:
     execution:
       pool:
-        max-size: 8
+        core-size: 10
 
 app:
   task:
