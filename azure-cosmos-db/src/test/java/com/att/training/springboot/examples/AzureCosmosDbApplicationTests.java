@@ -4,19 +4,32 @@ import com.att.training.springboot.examples.domain.TodoItem;
 import com.att.training.springboot.examples.persistence.TodoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
+import org.testcontainers.containers.Container.ExecResult;
 import org.testcontainers.containers.CosmosDBEmulatorContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +44,8 @@ class AzureCosmosDbApplicationTests {
     private static final CosmosDBEmulatorContainer cosmos = new CosmosDBEmulatorContainer(
             DockerImageName.parse("mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview")
     ).withCommand("--protocol", "https");
+    @TempDir
+    private static Path tempFolder;
     @Autowired
     private ObjectMapper mapper;
     @Autowired
@@ -38,15 +53,32 @@ class AzureCosmosDbApplicationTests {
     @Autowired
     private TodoRepository todoRepository;
 
-    static {
-        cosmos.start();
+    @BeforeAll
+    static void beforeAll() {
         configureTrustStore();
     }
 
+    @SneakyThrows({IOException.class, GeneralSecurityException.class})
     private static void configureTrustStore() {
-        System.setProperty("javax.net.ssl.trustStore", "src/test/resources/azure-cosmos-emulator-truststore.p12");
-        System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        String keyStorePassword = cosmos.getEmulatorKey();
+        KeyStore keyStore = buildKeyStore(keyStorePassword);
+        Path keyStoreFile = tempFolder.resolve("azure-cosmos-emulator.p12");
+        keyStore.store(new FileOutputStream(keyStoreFile.toFile()), keyStorePassword.toCharArray());
+        System.setProperty("javax.net.ssl.trustStore", keyStoreFile.toString());
+        System.setProperty("javax.net.ssl.trustStorePassword", keyStorePassword);
         System.setProperty("javax.net.ssl.trustStoreType", "PKCS12");
+    }
+
+    @SneakyThrows({IOException.class, InterruptedException.class, GeneralSecurityException.class})
+    private static KeyStore buildKeyStore(String keyStorePassword) {
+        ExecResult execResult = cosmos.execInContainer("sh", "-c",
+                "openssl s_client -connect localhost:8081 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'");
+        InputStream certificateStream = new ByteArrayInputStream(execResult.getStdout().getBytes());
+        Certificate certificate = CertificateFactory.getInstance("X.509").generateCertificate(certificateStream);
+        KeyStore keystore = KeyStore.getInstance("PKCS12");
+        keystore.load(null, keyStorePassword.toCharArray());
+        keystore.setCertificateEntry("azure-cosmos-emulator", certificate);
+        return keystore;
     }
 
     @BeforeEach
