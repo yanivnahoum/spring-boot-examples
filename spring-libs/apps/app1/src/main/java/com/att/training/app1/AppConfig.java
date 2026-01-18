@@ -14,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
 class AppConfig {
     @Bean
     CommandLineRunner greet(Greeter greeter) {
-        return args -> log.info(greeter.greet());
+        return _ -> log.info(greeter.greet());
     }
 }

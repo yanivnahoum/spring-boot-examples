@@ -22,6 +22,6 @@ class WelcomeConfig {
 
     @Bean
     CommandLineRunner welcome(Welcomer welcomer) {
-        return args -> log.info(welcomer.greet());
+        return _ -> log.info(welcomer.greet());
     }
 }
