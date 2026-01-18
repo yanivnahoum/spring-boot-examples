@@ -9,8 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 @Slf4j
 public class SpringConcurrencyApplication {
-
-    void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(SpringConcurrencyApplication.class, args);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 public class FeatureManagementApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(FeatureManagementApplication.class, args);
     }
 

@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class ContextPropagationApplication {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(ContextPropagationApplication.class, args);
     }
 }

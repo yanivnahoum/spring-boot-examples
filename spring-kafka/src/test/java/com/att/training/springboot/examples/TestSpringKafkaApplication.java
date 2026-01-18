@@ -14,7 +14,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 public class TestSpringKafkaApplication {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.from(SpringKafkaApplication::main)
                 .with(KafkaConfiguration.class)
                 .run(args);

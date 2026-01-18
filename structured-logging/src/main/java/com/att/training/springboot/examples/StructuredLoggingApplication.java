@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class StructuredLoggingApplication {
-	public static void main(String[] args) {
+	static void main(String[] args) {
 		SpringApplication.run(StructuredLoggingApplication.class, args);
 	}
 }

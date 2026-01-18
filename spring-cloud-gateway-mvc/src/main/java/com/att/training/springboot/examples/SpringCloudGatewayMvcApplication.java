@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 public class SpringCloudGatewayMvcApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(SpringCloudGatewayMvcApplication.class, args);
     }
 

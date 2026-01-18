@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
 @EnableScheduling
 @Slf4j
 public class SpringTaskExecutionAndSchedulingApplication {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(SpringTaskExecutionAndSchedulingApplication.class, args);
     }
 

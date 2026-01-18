@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class MultipleObjectMappersApplication {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(MultipleObjectMappersApplication.class, args);
     }
 }
