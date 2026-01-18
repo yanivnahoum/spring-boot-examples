@@ -92,9 +92,7 @@ class AzureCosmosDbComponentTest {
         item.setUserId(userId);
         item.setDescription("Component Test Task");
 
-        TodoItem[] createdItemHolder = new TodoItem[1];
-
-        mockMvcTester.post()
+        TodoItem createdItem = mockMvcTester.post()
                 .uri("/api/todos")
                 .contentType(APPLICATION_JSON)
                 .content(mapper.writeValueAsBytes(item))
@@ -102,15 +100,14 @@ class AzureCosmosDbComponentTest {
                 .hasStatus(HttpStatus.CREATED)
                 .bodyJson()
                 .convertTo(TodoItem.class)
-                .satisfies(createdItem -> {
-                    assertThat(createdItem).isNotNull()
-                            .extracting(TodoItem::getId).isNotNull();
-                    createdItemHolder[0] = createdItem;
-                });
+                .satisfies(todoItem -> assertThat(todoItem).isNotNull()
+                        .extracting(TodoItem::getId)
+                        .isNotNull())
+                .actual();
 
 
         mockMvcTester.get()
-                .uri("/api/todos/{userId}/{id}", userId, createdItemHolder[0].getId())
+                .uri("/api/todos/{userId}/{id}", userId, createdItem.getId())
                 .accept(APPLICATION_JSON)
                 .assertThat()
                 .hasStatusOk()
