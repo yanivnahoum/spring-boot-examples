@@ -38,7 +38,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Testcontainers
-class AzureCosmosDbApplicationTests {
+class AzureCosmosDbComponentTest {
     @Container
     @ServiceConnection
     private static final CosmosDBEmulatorContainer cosmos = new CosmosDBEmulatorContainer(
@@ -66,13 +66,12 @@ class AzureCosmosDbApplicationTests {
         keyStore.store(new FileOutputStream(keyStoreFile.toFile()), keyStorePassword.toCharArray());
         System.setProperty("javax.net.ssl.trustStore", keyStoreFile.toString());
         System.setProperty("javax.net.ssl.trustStorePassword", keyStorePassword);
-        System.setProperty("javax.net.ssl.trustStoreType", "PKCS12");
     }
 
     @SneakyThrows({IOException.class, InterruptedException.class, GeneralSecurityException.class})
     private static KeyStore buildKeyStore(String keyStorePassword) {
         ExecResult execResult = cosmos.execInContainer("sh", "-c",
-                "openssl s_client -connect localhost:8081 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'");
+                "openssl s_client -connect localhost:8081 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'");
         InputStream certificateStream = new ByteArrayInputStream(execResult.getStdout().getBytes());
         Certificate certificate = CertificateFactory.getInstance("X.509").generateCertificate(certificateStream);
         KeyStore keystore = KeyStore.getInstance("PKCS12");
