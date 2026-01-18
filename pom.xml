@@ -34,6 +34,10 @@
         <datasource-decorator.version>1.12.0</datasource-decorator.version>
         <!-- https://issues.apache.org/jira/browse/KAFKA-19951 -->
         <!-- <kafka.version>3.9.2</kafka.version> -->
+        <!-- Overriding vulnerable version brought in by testcontainers -->
+        <commons-compress.version>1.28.0</commons-compress.version>
+        <!-- Overriding vulnerable version -->
+        <commons-lang3.version>3.20.0</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -52,6 +56,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Overriding vulnerable version brought in by testcontainers -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
             </dependency>
 
             <dependency>
@@ -92,6 +103,7 @@
         <module>spring-redisson</module>
         <module>multiple-object-mappers</module>
         <module>azure-service-bus</module>
+        <module>azure-cosmos-db</module>
         <module>azure-event-hubs</module>
         <module>spring-task-execution-and-scheduling</module>
     </modules>

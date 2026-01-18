@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    azure:
+      cosmos:
+        endpoint: https://localhost:8081
+        database: TodoDB
+        populate-query-metrics: true
+        connection-mode: gateway
