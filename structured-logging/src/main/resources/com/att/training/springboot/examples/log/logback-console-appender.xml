@@ -39,9 +39,9 @@
                             </providers>
                         </nestedField>
                     </providers>
-                    <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
+                    <decorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
                         <path>/additional/user/name</path>
-                    </jsonGeneratorDecorator>
+                    </decorator>
                 </encoder>
             </then>
             <else>
