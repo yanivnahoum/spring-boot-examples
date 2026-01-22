@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /dmp
+spring:
+  ai:
+    mcp:
+      server:
+        name: dmp-work-order-generic-mcp
+        version: 0.1
+        base-url: ${server.servlet.context-path}
+        sse-endpoint: /v1/sse
+        sse-message-endpoint: /v1/mcp/message

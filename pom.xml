@@ -106,6 +106,7 @@
         <module>azure-cosmos-db</module>
         <module>azure-event-hubs</module>
         <module>spring-task-execution-and-scheduling</module>
+        <module>spring-ai</module>
     </modules>
 
     <build>
