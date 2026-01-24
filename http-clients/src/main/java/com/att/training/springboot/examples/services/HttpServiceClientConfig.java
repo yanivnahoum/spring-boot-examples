@@ -15,7 +15,7 @@ import org.springframework.web.service.registry.ImportHttpServices;
 @ImportHttpServices(group = "actor", types = { ActorService.class, FilmographyService.class })
 @ImportHttpServices(group = "review", types = { RatingService.class, ReviewService.class })
 @Configuration(proxyBeanMethods = false)
-public class HttpClientConfig {
+public class HttpServiceClientConfig {
     // In case we need programmatic configuration of the HTTP client groups
     @Bean
     RestClientHttpServiceGroupConfigurer httpServiceGroupConfigurer() {
