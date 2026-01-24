@@ -6,7 +6,6 @@ import com.att.training.springboot.examples.services.movie.GenreService;
 import com.att.training.springboot.examples.services.movie.MovieService;
 import com.att.training.springboot.examples.services.review.RatingService;
 import com.att.training.springboot.examples.services.review.ReviewService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.support.RestClientHttpServiceGroupConfigurer;
 import org.springframework.web.service.registry.ImportHttpServices;
@@ -17,9 +16,17 @@ import org.springframework.web.service.registry.ImportHttpServices;
 @Configuration(proxyBeanMethods = false)
 public class HttpServiceClientConfig {
     // In case we need programmatic configuration of the HTTP client groups
-    @Bean
+//    @Bean
     RestClientHttpServiceGroupConfigurer httpServiceGroupConfigurer() {
-        return groups -> groups.forEachClient((group, restClientBuilder) ->
-                restClientBuilder.defaultHeader("service-group", group.name()));
+        return groups -> {
+//            groups.filterByName("actor").forEachClient((_, restClientBuilder) ->
+//                    restClientBuilder
+//                            .apiVersionInserter(ApiVersionInserter.useHeader("X-Version"))
+//                            .defaultApiVersion("1.0")
+//            );
+
+            groups.forEachClient((group, restClientBuilder) ->
+                    restClientBuilder.defaultHeader("service-group", group.name()));
+        };
     }
 }

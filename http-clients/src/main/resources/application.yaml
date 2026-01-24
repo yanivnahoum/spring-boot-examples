@@ -13,13 +13,13 @@ spring:
       actor:
         base-url: http://actor/api
         apiversion:
-          default-version: 1.0
+          default: 1.0
           insert:
             header: X-Version
       review:
         base-url: http://review/api
         apiversion:
-          default-version: v2
+          default: 2
           insert:
             query-parameter: version
 

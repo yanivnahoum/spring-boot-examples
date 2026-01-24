@@ -103,7 +103,7 @@ class HttpInterfacesWireMockTest {
     @Test
     void testGetActorById() {
         actorMock.stubFor(get("/actors/1")
-                .withHeader("X-Version", equalTo("1"))
+                .withHeader("X-Version", equalTo("1.0"))
                 .willReturn(aResponse()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                         .withBody("""
