@@ -5,6 +5,7 @@ import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuil
 import org.apache.hc.core5.util.TimeValue;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.HttpComponentsClientHttpRequestFactoryBuilder;
+import org.springframework.boot.http.client.autoconfigure.ClientHttpRequestFactoryBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,12 +21,12 @@ public class RestClientConfig {
                 .withConnectionManagerCustomizer(this::customizeConnectionPool);
     }
 
-    // Another option:
+    // Another option, uncomment @Bean to use:
     //@Bean
-    //public ClientHttpRequestFactoryBuilderCustomizer<HttpComponentsClientHttpRequestFactoryBuilder> customizer() {
-    //    return builder -> builder.withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
-    //            .withConnectionManagerCustomizer(this::customizeConnectionPool);
-    //}
+    public ClientHttpRequestFactoryBuilderCustomizer<HttpComponentsClientHttpRequestFactoryBuilder> customizer() {
+        return builder -> builder.withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
+                .withConnectionManagerCustomizer(this::customizeConnectionPool);
+    }
 
     private void customizeConnectionPool(PoolingHttpClientConnectionManagerBuilder pool) {
         pool.setDefaultConnectionConfig(ConnectionConfig.custom()
@@ -36,5 +37,3 @@ public class RestClientConfig {
         pool.setMaxConnTotal(400);
     }
 }
-
-

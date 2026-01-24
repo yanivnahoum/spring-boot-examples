@@ -1,10 +1,28 @@
 spring:
   http:
     clients:
-      imperative:
-        factory: http-components
       connect-timeout: 3s
       read-timeout: 10s
+      redirects: dont-follow
+      imperative:
+        factory: http-components
+    serviceclient:
+      movie:
+        base-url: http://movie/api
+        read-timeout: 15s
+      actor:
+        base-url: http://actor/api
+        apiversion:
+          default-version: v1
+          insert:
+            header: X-Version
+      review:
+        base-url: http://review/api
+        apiversion:
+          default-version: v2
+          insert:
+            query-parameter: version
+
 app:
   user:
     base-url: http://localhost:8088
