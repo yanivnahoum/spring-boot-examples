@@ -100,6 +100,7 @@
         <module>azure-service-bus</module>
         <module>azure-event-hubs</module>
         <module>spring-task-execution-and-scheduling</module>
+        <module>api-versioning</module>
     </modules>
 
     <build>
