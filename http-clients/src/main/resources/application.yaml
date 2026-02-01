@@ -21,7 +21,7 @@ spring:
         apiversion:
           default: 2
           insert:
-            query-parameter: version
+            header: X-Version
 
 app:
   user:
