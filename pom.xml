@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.9</version>
+        <version>3.5.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -31,7 +31,7 @@
         <mockwebserver.version>5.3.2</mockwebserver.version>
         <redisson.version>3.52.0</redisson.version>
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
-        <datasource-decorator.version>1.12.0</datasource-decorator.version>
+        <datasource-decorator.version>1.12.1</datasource-decorator.version>
         <!-- https://issues.apache.org/jira/browse/KAFKA-19951 -->
         <!-- <kafka.version>3.9.2</kafka.version> -->
         <!-- Overriding vulnerable version brought in by testcontainers -->
