@@ -18,9 +18,7 @@
     <properties>
         <revision>0.0.1-SNAPSHOT</revision>
         <java.version>25</java.version>
-        <maven.compiler.enablePreview>true</maven.compiler.enablePreview>
         <argLine>
-            --enable-preview
             -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
             -Xshare:off
         </argLine>
