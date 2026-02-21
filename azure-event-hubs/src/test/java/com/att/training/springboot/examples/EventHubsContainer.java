@@ -26,7 +26,7 @@ public abstract class EventHubsContainer {
                 .withNetwork(network);
         azurite.start();
 
-        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.1.0")
+        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.2.0")
                 .acceptLicense()
                 .withNetwork(network)
                 .withConfig(MountableFile.forClasspathResource("/event-hubs-config.json"))
