@@ -1,9 +1,21 @@
-PUT http://localhost:8080/kafka/produce
+PUT http://localhost:8080/kafka/produce/price-change
 Content-Type: application/json
 
 {
   "code": "P9999",
   "price": "9.99"
+}
+
+
+### Send OrderEvent to cluster2
+POST http://localhost:8080/kafka/produce/order
+Content-Type: application/json
+
+{
+  "orderId": "O1001",
+  "customerId": "C42",
+  "quantity": 3,
+  "amount": "149.99"
 }
 
 

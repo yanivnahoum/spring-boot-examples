@@ -26,7 +26,7 @@ class UselessEventConsumerTest {
     void whenConsume_thenUpdatePriceOnProductDao() {
         var event = new ProductPriceChangedEvent("P123", new BigDecimal("19.99"));
 
-        eventConsumer.consume(event);
+        eventConsumer.consumeProductPriceChange(event);
 
         verify(productDao).updatePrice("P123", new BigDecimal("19.99"));
     }

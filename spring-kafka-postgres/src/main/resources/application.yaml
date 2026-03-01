@@ -29,11 +29,16 @@ spring:
     username: catalog
     password: dummy
     hikari:
+      pool-name: postgres
       maximum-pool-size: 5
 
   sql:
     init:
       mode: always
+
+  output:
+    ansi:
+      enabled: always
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -49,6 +54,7 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       retries: 3
 
-  output:
-    ansi:
-      enabled: always
+app:
+  kafka:
+    cluster2:
+      bootstrap-servers: localhost:9093

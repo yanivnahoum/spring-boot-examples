@@ -10,7 +10,11 @@ import org.springframework.stereotype.Component;
 public class EventProcessor {
     private final ProductDao productDao;
 
-    public void process(ProductPriceChangedEvent event) {
+    public void processProductPriceChanged(ProductPriceChangedEvent event) {
         productDao.updatePrice(event.code(), event.price());
+    }
+
+    public void processOrderCreated(OrderCreated event) {
+        log.info("#processOrderCreated - processing order created event: {}", event);
     }
 }
