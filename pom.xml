@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.10</version>
+        <version>3.5.11</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -17,10 +17,8 @@
 
     <properties>
         <revision>0.0.1-SNAPSHOT</revision>
-        <java.version>21</java.version>
-        <maven.compiler.enablePreview>true</maven.compiler.enablePreview>
+        <java.version>25</java.version>
         <argLine>
-            --enable-preview
             -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
             -Xshare:off
         </argLine>
@@ -33,11 +31,13 @@
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
         <datasource-decorator.version>1.12.1</datasource-decorator.version>
         <!-- https://issues.apache.org/jira/browse/KAFKA-19951 -->
-        <!-- <kafka.version>3.9.2</kafka.version> -->
+        <kafka.version>3.9.2</kafka.version>
         <!-- Overriding vulnerable version brought in by testcontainers -->
         <commons-compress.version>1.28.0</commons-compress.version>
         <!-- Overriding vulnerable version -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
+        <!-- Override vulnerable version brought in by Spring Cloud Azure -->
+        <nimbus-jose-jwt.version>10.6</nimbus-jose-jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -56,6 +56,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Override vulnerable version brought in by Spring Cloud Azure -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
             </dependency>
 
             <!-- Overriding vulnerable version brought in by testcontainers -->
