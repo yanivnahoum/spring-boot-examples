@@ -11,10 +11,11 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistrar;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.validation.Validator;
+
+import java.util.Map;
 
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
@@ -29,17 +30,10 @@ public class KafkaConfig implements KafkaListenerConfigurer {
 
     @Cluster2
     @Bean(defaultCandidate = false)
-    ProducerFactory<String, OrderCreated> cluster2ProducerFactory(KafkaProperties kafkaProperties,
-                                                                  Cluster2KafkaProperties cluster2KafkaProperties) {
-        var producerProperties = kafkaProperties.buildProducerProperties();
-        producerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, cluster2KafkaProperties.bootstrapServers());
-        return new DefaultKafkaProducerFactory<>(producerProperties);
-    }
-
-    @Cluster2
-    @Bean(defaultCandidate = false)
-    KafkaTemplate<String, OrderCreated> orderEventKafkaTemplate(@Cluster2 ProducerFactory<String, OrderCreated> cluster2ProducerFactory) {
-        return new KafkaTemplate<>(cluster2ProducerFactory);
+    KafkaTemplate<String, OrderCreated> orderEventKafkaTemplate(ProducerFactory<String, OrderCreated> producerFactory,
+                                                                Cluster2KafkaProperties cluster2KafkaProperties) {
+        Map<String, Object> producerOverrides = Map.of(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, cluster2KafkaProperties.bootstrapServers());
+        return new KafkaTemplate<>(producerFactory, producerOverrides);
     }
 
     @Cluster2
