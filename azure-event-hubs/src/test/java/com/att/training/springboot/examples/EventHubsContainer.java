@@ -17,6 +17,7 @@ import org.testcontainers.utility.MountableFile;
 })
 public abstract class EventHubsContainer {
     private static AzuriteContainer azurite;
+    // TODO: Switch to @ServiceConnection once the Azurite issue is fixed: https://github.com/Azure/Azurite/issues/2623
     private static final EventHubsEmulatorContainer eventHubs = buildAndStart();
 
 
