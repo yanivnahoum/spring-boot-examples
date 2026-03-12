@@ -52,7 +52,6 @@
         <dependency>
             <groupId>com.github.gavlyukovskiy</groupId>
             <artifactId>datasource-proxy-spring-boot-starter</artifactId>
-            <version>${datasource-decorator.version}</version>
         </dependency>
 
         <dependency>
