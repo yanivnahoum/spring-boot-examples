@@ -13,6 +13,7 @@ import com.att.training.springboot.examples.services.review.RatingService;
 import com.att.training.springboot.examples.services.review.Review;
 import com.att.training.springboot.examples.services.review.ReviewService;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -100,6 +101,7 @@ class HttpInterfacesWireMockTest {
         assertThat(genre.description()).isEqualTo("Science Fiction");
     }
 
+    @Disabled("Until https://github.com/spring-projects/spring-boot/issues/49701 is resolved")
     @Test
     void testGetActorById() {
         actorMock.stubFor(get("/actors/1")

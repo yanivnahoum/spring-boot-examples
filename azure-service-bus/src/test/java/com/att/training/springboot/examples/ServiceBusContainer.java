@@ -3,8 +3,8 @@ package com.att.training.springboot.examples;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.azure.ServiceBusEmulatorContainer;
-import org.testcontainers.containers.MSSQLServerContainer;
 import org.testcontainers.containers.Network;
+import org.testcontainers.mssqlserver.MSSQLServerContainer;
 import org.testcontainers.utility.MountableFile;
 
 @TestPropertySource(properties = "spring.cloud.azure.servicebus.entity-name=queue-1")
@@ -12,11 +12,10 @@ public abstract class ServiceBusContainer {
     @ServiceConnection
     private static final ServiceBusEmulatorContainer serviceBus = buildAndStart();
 
-    @SuppressWarnings("resource")
     private static ServiceBusEmulatorContainer buildAndStart() {
         var network = Network.newNetwork();
 
-        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2025-CU2-ubuntu-22.04")
+        var mssql = new MSSQLServerContainer("mcr.microsoft.com/mssql/server:2025-CU3-ubuntu-24.04")
                 .acceptLicense()
                 .withNetwork(network);
         mssql.start();
