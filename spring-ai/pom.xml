@@ -11,10 +11,6 @@
 
     <artifactId>spring-ai</artifactId>
 
-    <properties>
-        <spring-ai.version>1.1.2</spring-ai.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
