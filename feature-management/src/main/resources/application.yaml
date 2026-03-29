@@ -1,6 +1,6 @@
 spring:
   config:
-    import: azureAppConfiguration
+    import: optional:azureAppConfiguration
   cloud:
     azure:
       appconfiguration:
