@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @TestConfiguration(proxyBeanMethods = false)
 class KafkaConfiguration {
-    private static final String IMAGE_NAME = "confluentinc/cp-kafka:7.9.4";
+    private static final String IMAGE_NAME = "confluentinc/cp-kafka:7.9.6";
 
     @ServiceConnection
     @Bean
