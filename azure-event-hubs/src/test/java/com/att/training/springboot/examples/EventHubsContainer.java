@@ -1,6 +1,7 @@
 package com.att.training.springboot.examples;
 
 import com.azure.storage.common.implementation.connectionstring.StorageConnectionString;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
@@ -16,9 +17,9 @@ import org.testcontainers.utility.MountableFile;
         "spring.cloud.azure.eventhubs.processor.checkpoint-store.create-container-if-not-exists=true",
 })
 public abstract class EventHubsContainer {
-    private static AzuriteContainer azurite;
+    @ServiceConnection
     private static final EventHubsEmulatorContainer eventHubs = buildAndStart();
-
+    private static AzuriteContainer azurite;
 
     private static EventHubsEmulatorContainer buildAndStart() {
         Network network = Network.newNetwork();
@@ -38,7 +39,6 @@ public abstract class EventHubsContainer {
 
     @DynamicPropertySource
     static void dynamicProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.cloud.azure.eventhubs.connection-string", eventHubs::getConnectionString);
         registry.add("spring.cloud.azure.eventhubs.processor.checkpoint-store.connection-string", azurite::getConnectionString);
         registry.add("spring.cloud.azure.eventhubs.processor.checkpoint-store.endpoint",
                 () -> StorageConnectionString.create(azurite.getConnectionString(), null).getBlobEndpoint().getPrimaryUri());

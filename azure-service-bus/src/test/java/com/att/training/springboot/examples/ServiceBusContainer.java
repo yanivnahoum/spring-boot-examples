@@ -1,7 +1,6 @@
 package com.att.training.springboot.examples;
 
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.azure.ServiceBusEmulatorContainer;
 import org.testcontainers.containers.MSSQLServerContainer;
@@ -10,6 +9,7 @@ import org.testcontainers.utility.MountableFile;
 
 @TestPropertySource(properties = "spring.cloud.azure.servicebus.entity-name=queue-1")
 public abstract class ServiceBusContainer {
+    @ServiceConnection
     private static final ServiceBusEmulatorContainer serviceBus = buildAndStart();
 
     @SuppressWarnings("resource")
@@ -28,10 +28,5 @@ public abstract class ServiceBusContainer {
                 .withMsSqlServerContainer(mssql);
         serviceBus.start();
         return serviceBus;
-    }
-
-    @DynamicPropertySource
-    static void dynamicProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.cloud.azure.servicebus.connection-string", serviceBus::getConnectionString);
     }
 }
