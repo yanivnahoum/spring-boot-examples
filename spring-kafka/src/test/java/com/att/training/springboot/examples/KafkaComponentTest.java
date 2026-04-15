@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.after;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 
@@ -27,8 +29,8 @@ class KafkaComponentTest {
     private String groupId;
 
     @ParameterizedTest
-    @ValueSource(strings = {"123", "456", "789"})
-    void givenPayload_whenPutProduce_then202AcceptedAndRecordIsProcessed(String payload) {
+    @ValueSource(strings = { "123", "789" })
+    void givenOddPayload_whenPutProduce_then202AcceptedAndRecordIsProcessed(String payload) {
         var response = mockMvc.put()
                 .uri("/produce/{payload}", payload)
                 .exchange();
@@ -37,5 +39,16 @@ class KafkaComponentTest {
         await().atMost(3, SECONDS).untilAsserted(() ->
                 verify(recordProcessor).process(payload, groupId)
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "456", "246" })
+    void givenEvenPayload_whenPutProduce_then202AcceptedAndRecordIsDiscarded(String payload) {
+        var response = mockMvc.put()
+                .uri("/produce/{payload}", payload)
+                .exchange();
+
+        assertThat(response).hasStatus(ACCEPTED);
+        verify(recordProcessor, after(2000).never()).process(any(), any());
     }
 }
