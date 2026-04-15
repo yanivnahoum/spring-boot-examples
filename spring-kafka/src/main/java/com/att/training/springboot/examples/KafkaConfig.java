@@ -16,7 +16,7 @@ public class KafkaConfig {
     @SuppressWarnings("java:S1452")
         // For this bean to be picked up by the listener container factory, it must be defined as RecordFilterStrategy<?, ?>
         // If we use RecordFilterStrategy<Integer, String>, it won't be applied to the ConcurrentKafkaListenerContainerFactoryConfigurer
-        // that is auto configured in KafkaAutoConfiguration and KafkaAnnotationDrivenConfiguration
+        // that is autoconfigured in KafkaAutoConfiguration and KafkaAnnotationDrivenConfiguration
     RecordFilterStrategy<?, ?> filterStrategy() {
         return (ConsumerRecord<Integer, String> consumerRecord) -> {
             if (consumerRecord.value() == null) {
@@ -33,7 +33,10 @@ public class KafkaConfig {
         };
     }
 
-    @Bean
+    // This would be needed if we had to configure factory.setAckDiscarded(true)
+    // From the Spring-kafka code it seems that it's needed only in case that we
+    // want to acknowledge discarded records when using MANUAL or MANUAL_IMMEDIATE ackMode.
+    //@Bean
     ConcurrentKafkaListenerContainerFactory<Object, Object> kafkaListenerContainerFactory(
             ConcurrentKafkaListenerContainerFactoryConfigurer configurer,
             ConsumerFactory<Object, Object> kafkaConsumerFactory) {
