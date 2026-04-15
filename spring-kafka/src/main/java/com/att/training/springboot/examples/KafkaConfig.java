@@ -39,7 +39,7 @@ public class KafkaConfig {
             ConsumerFactory<Object, Object> kafkaConsumerFactory) {
         var factory = new ConcurrentKafkaListenerContainerFactory<>();
         configurer.configure(factory, kafkaConsumerFactory);
-        factory.setAckDiscarded(false);
+        factory.setAckDiscarded(true);
         return factory;
     }
 }
