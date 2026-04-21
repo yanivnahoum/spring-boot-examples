@@ -23,7 +23,7 @@
             -Xshare:off
         </argLine>
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
-        <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <spring-cloud.version>2025.0.2</spring-cloud.version>
         <spring-cloud-azure-dependencies.version>6.2.0</spring-cloud-azure-dependencies.version>
         <spring-ai.version>1.1.4</spring-ai.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
@@ -36,7 +36,7 @@
         <!-- Overriding vulnerable version -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
-        <nimbus-jose-jwt.version>10.6</nimbus-jose-jwt.version>
+        <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
         <!-- Overriding vulnerable dependency 10.1.53 from Spring Boot 3.5.13 -->
         <tomcat.version>10.1.54</tomcat.version>
     </properties>
