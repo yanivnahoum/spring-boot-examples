@@ -10,12 +10,13 @@ import org.testcontainers.utility.MountableFile;
 @TestPropertySource(properties = "spring.cloud.azure.servicebus.entity-name=queue-1")
 public abstract class ServiceBusContainer {
     @ServiceConnection
+    @SuppressWarnings("unused")
     private static final ServiceBusEmulatorContainer serviceBus = buildAndStart();
 
     private static ServiceBusEmulatorContainer buildAndStart() {
         var network = Network.newNetwork();
 
-        var mssql = new MSSQLServerContainer("mcr.microsoft.com/mssql/server:2025-CU3-ubuntu-24.04")
+        var mssql = new MSSQLServerContainer("mcr.microsoft.com/mssql/server:2025-CU4-ubuntu-24.04")
                 .acceptLicense()
                 .withNetwork(network);
         mssql.start();

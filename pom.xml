@@ -24,7 +24,7 @@
         </argLine>
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
-        <spring-cloud-azure-dependencies.version>7.1.0</spring-cloud-azure-dependencies.version>
+        <spring-cloud-azure-dependencies.version>7.2.0</spring-cloud-azure-dependencies.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <mockwebserver.version>5.3.2</mockwebserver.version>
         <redisson.version>4.3.1</redisson.version>
