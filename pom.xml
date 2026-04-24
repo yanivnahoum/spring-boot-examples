@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.13</version>
+        <version>3.5.14</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -37,8 +37,6 @@
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
         <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
-        <!-- Overriding vulnerable dependency 10.1.53 from Spring Boot 3.5.13 -->
-        <tomcat.version>10.1.54</tomcat.version>
     </properties>
 
     <dependencyManagement>
