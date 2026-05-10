@@ -31,6 +31,8 @@
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
         <datasource-decorator.version>2.0.0</datasource-decorator.version>
         <wiremock-spring-boot.version>4.2.1</wiremock-spring-boot.version>
+        <!-- Overriding vulnerable version from Spring Boot 4.0.6 -->
+        <netty.version>4.2.13.Final</netty.version>
     </properties>
 
     <dependencyManagement>
