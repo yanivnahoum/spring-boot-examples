@@ -18,6 +18,7 @@ import org.testcontainers.utility.MountableFile;
 })
 public abstract class EventHubsContainer {
     @ServiceConnection
+    @SuppressWarnings("unused")
     private static final EventHubsEmulatorContainer eventHubs = buildAndStart();
     private static AzuriteContainer azurite;
 
@@ -27,7 +28,7 @@ public abstract class EventHubsContainer {
                 .withNetwork(network);
         azurite.start();
 
-        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.1.0")
+        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.2.0")
                 .acceptLicense()
                 .withNetwork(network)
                 .withConfig(MountableFile.forClasspathResource("/event-hubs-config.json"))

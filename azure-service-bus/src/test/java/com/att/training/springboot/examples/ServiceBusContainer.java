@@ -10,18 +10,19 @@ import org.testcontainers.utility.MountableFile;
 @TestPropertySource(properties = "spring.cloud.azure.servicebus.entity-name=queue-1")
 public abstract class ServiceBusContainer {
     @ServiceConnection
+    @SuppressWarnings("unused")
     private static final ServiceBusEmulatorContainer serviceBus = buildAndStart();
 
     @SuppressWarnings("resource")
     private static ServiceBusEmulatorContainer buildAndStart() {
         var network = Network.newNetwork();
 
-        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2022-CU22-ubuntu-22.04")
+        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2025-CU4-ubuntu-24.04")
                 .acceptLicense()
                 .withNetwork(network);
         mssql.start();
 
-        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:1.1.2")
+        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:2.0.0")
                 .acceptLicense()
                 .withConfig(MountableFile.forClasspathResource("/service-bus-config.json"))
                 .withNetwork(network)
