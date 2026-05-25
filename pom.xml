@@ -38,7 +38,7 @@
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
         <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
         <!-- Overriding vulnerable versions from Spring Boot 3.5.14 -->
-        <netty.version>4.1.133.Final</netty.version>
+        <netty.version>4.1.134.Final</netty.version>
         <tomcat.version>10.1.55</tomcat.version>
         <!-- Override vulnerable version 1.80 from Spring Cloud -->
         <bouncycastle.version>1.84</bouncycastle.version>
