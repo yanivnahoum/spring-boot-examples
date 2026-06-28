@@ -8,7 +8,7 @@ public class UserRestTemplate {
 
     public UserRestTemplate(RestTemplateBuilder restTemplateBuilder, UserClientProperties userClientProperties) {
         this.restTemplate = restTemplateBuilder
-                .rootUri(userClientProperties.baseUrl())
+                .baseUri(userClientProperties.baseUrl())
                 .connectTimeout(userClientProperties.connectTimeout())
                 .readTimeout(userClientProperties.readTimeout())
                 .build();

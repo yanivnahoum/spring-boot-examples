@@ -24,7 +24,8 @@ public class RestClientConfig {
     // Another option, uncomment @Bean to use:
     //@Bean
     public ClientHttpRequestFactoryBuilderCustomizer<HttpComponentsClientHttpRequestFactoryBuilder> customizer() {
-        return builder -> builder.withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
+        return builder -> builder
+                .withDefaultRequestConfigCustomizer(config -> config.setConnectionRequestTimeout(30, TimeUnit.SECONDS))
                 .withConnectionManagerCustomizer(this::customizeConnectionPool);
     }
 
