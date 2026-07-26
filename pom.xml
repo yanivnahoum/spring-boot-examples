@@ -33,8 +33,10 @@
         <datasource-decorator.version>1.12.1</datasource-decorator.version>
         <!-- Overriding vulnerable version brought in by testcontainers -->
         <commons-compress.version>1.28.0</commons-compress.version>
-        <!-- Overriding vulnerable version -->
+        <!-- Overriding vulnerable versions from Spring Boot 3.5.x-->
         <commons-lang3.version>3.20.0</commons-lang3.version>
+        <jackson-bom.version>2.21.5</jackson-bom.version>
+        <netty.version>4.1.136.Final</netty.version>
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
         <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
         <!-- Override vulnerable version 1.80 from Spring Cloud -->
