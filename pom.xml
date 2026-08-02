@@ -22,7 +22,7 @@
             -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
             -Xshare:off
         </argLine>
-        <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
+        <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
         <spring-cloud.version>2025.0.3</spring-cloud.version>
         <spring-cloud-azure-dependencies.version>6.4.0</spring-cloud-azure-dependencies.version>
         <spring-ai.version>1.1.8</spring-ai.version>
@@ -39,8 +39,6 @@
         <netty.version>4.1.136.Final</netty.version>
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
         <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
-        <!-- Override vulnerable version 1.80 from Spring Cloud -->
-        <bouncycastle.version>1.84</bouncycastle.version>
     </properties>
 
     <dependencyManagement>
@@ -57,15 +55,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Override vulnerable version 1.80 from Spring Cloud -->
-            <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bc-jdk18on-bom</artifactId>
-                <version>${bouncycastle.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
