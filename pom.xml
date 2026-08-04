@@ -24,7 +24,7 @@
         </argLine>
         <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
         <spring-cloud.version>2025.0.3</spring-cloud.version>
-        <spring-cloud-azure-dependencies.version>6.4.0</spring-cloud-azure-dependencies.version>
+        <spring-cloud-azure-dependencies.version>6.5.0</spring-cloud-azure-dependencies.version>
         <spring-ai.version>1.1.8</spring-ai.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
         <mockwebserver.version>5.4.0</mockwebserver.version>
@@ -33,12 +33,13 @@
         <datasource-decorator.version>1.12.1</datasource-decorator.version>
         <!-- Overriding vulnerable version brought in by testcontainers -->
         <commons-compress.version>1.28.0</commons-compress.version>
+        <!-- Override vulnerable version brought in by Spring Cloud Azure -->
+        <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
         <!-- Overriding vulnerable versions from Spring Boot 3.5.x-->
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <jackson-bom.version>2.21.5</jackson-bom.version>
         <netty.version>4.1.136.Final</netty.version>
-        <!-- Override vulnerable version brought in by Spring Cloud Azure -->
-        <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
+        <log4j2.version>2.25.5</log4j2.version>
     </properties>
 
     <dependencyManagement>
