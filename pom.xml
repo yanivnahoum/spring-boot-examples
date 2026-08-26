@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version>
+        <version>4.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,20 +23,15 @@
             -Xshare:off
         </argLine>
         <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
-        <spring-cloud.version>2025.1.2</spring-cloud.version>
+        <spring-cloud.version>2025.1.3</spring-cloud.version>
         <spring-cloud-azure-dependencies.version>7.4.0</spring-cloud-azure-dependencies.version>
-        <spring-ai.version>2.0.0</spring-ai.version>
+        <spring-ai.version>2.0.1</spring-ai.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
-        <mockwebserver.version>5.4.0</mockwebserver.version>
-        <redisson.version>4.6.1</redisson.version>
+        <mockwebserver.version>5.5.0</mockwebserver.version>
+        <redisson.version>4.7.0</redisson.version>
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
         <datasource-decorator.version>2.0.1</datasource-decorator.version>
         <wiremock-spring-boot.version>4.2.2</wiremock-spring-boot.version>
-        <!-- Overriding vulnerable versions from Spring Boot 4.1.0-->
-        <jackson-2-bom.version>2.21.5</jackson-2-bom.version>
-        <jackson-bom.version>3.1.5</jackson-bom.version>
-        <netty.version>4.2.16.Final</netty.version>
-        <log4j2.version>2.25.5</log4j2.version>
     </properties>
 
     <dependencyManagement>

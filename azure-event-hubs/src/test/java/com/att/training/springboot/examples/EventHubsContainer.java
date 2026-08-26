@@ -23,11 +23,11 @@ public abstract class EventHubsContainer {
 
     private static EventHubsEmulatorContainer buildAndStart() {
         Network network = Network.newNetwork();
-        azurite = new AzuriteContainer("mcr.microsoft.com/azure-storage/azurite:3.35.0")
+        azurite = new AzuriteContainer("mcr.microsoft.com/azure-storage/azurite:3.37.0")
                 .withNetwork(network);
         azurite.start();
 
-        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.2.0")
+        var eventHubs = new EventHubsEmulatorContainer("mcr.microsoft.com/azure-messaging/eventhubs-emulator:2.2.1")
                 .acceptLicense()
                 .withNetwork(network)
                 .withConfig(MountableFile.forClasspathResource("/event-hubs-config.json"))
