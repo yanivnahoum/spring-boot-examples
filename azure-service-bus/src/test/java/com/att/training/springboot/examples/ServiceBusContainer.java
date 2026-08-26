@@ -17,12 +17,12 @@ public abstract class ServiceBusContainer {
     private static ServiceBusEmulatorContainer buildAndStart() {
         var network = Network.newNetwork();
 
-        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2025-CU4-ubuntu-24.04")
+        var mssql = new MSSQLServerContainer<>("mcr.microsoft.com/mssql/server:2025-CU8-ubuntu-24.04")
                 .acceptLicense()
                 .withNetwork(network);
         mssql.start();
 
-        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:2.0.0")
+        var serviceBus = new ServiceBusEmulatorContainer("mcr.microsoft.com/azure-messaging/servicebus-emulator:2.0.1")
                 .acceptLicense()
                 .withConfig(MountableFile.forClasspathResource("/service-bus-config.json"))
                 .withNetwork(network)

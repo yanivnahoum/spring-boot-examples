@@ -1,7 +1,6 @@
 package com.att.training.springboot.examples;
 
 import com.azure.messaging.eventhubs.EventData;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,7 +14,7 @@ import static org.awaitility.Awaitility.await;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-@Disabled("Until https://github.com/Azure/Azurite/issues/2623 is resolved")
+//@Disabled("Until https://github.com/Azure/Azurite/issues/2623 is resolved")
 @SpringBootTest
 @AutoConfigureMockMvc
 class EventHubsAppTest extends EventHubsContainer {
