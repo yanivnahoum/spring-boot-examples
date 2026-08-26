@@ -14,7 +14,6 @@ import static org.awaitility.Awaitility.await;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-//@Disabled("Until https://github.com/Azure/Azurite/issues/2623 is resolved")
 @SpringBootTest
 @AutoConfigureMockMvc
 class EventHubsAppTest extends EventHubsContainer {
