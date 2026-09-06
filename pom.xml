@@ -35,6 +35,8 @@
         <commons-compress.version>1.28.0</commons-compress.version>
         <!-- Override vulnerable version brought in by Spring Cloud Azure -->
         <nimbus-jose-jwt.version>10.9</nimbus-jose-jwt.version>
+        <!-- Overriding vulnerable version brought in by Spring Cloud -->
+        <bouncycastle.version>1.85.2</bouncycastle.version>
         <!-- Overriding vulnerable versions from Spring Boot 3.5.x-->
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <jackson-bom.version>2.21.5</jackson-bom.version>
@@ -42,7 +44,7 @@
         <log4j2.version>2.25.5</log4j2.version>
         <httpclient5.version>5.6.4</httpclient5.version>
         <httpcore5.version>5.4.3</httpcore5.version>
-
+        <tomcat.version>10.1.59</tomcat.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +61,15 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Overriding vulnerable version brought in by Spring Cloud -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bc-jdk18on-bom</artifactId>
+                <version>${bouncycastle.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
