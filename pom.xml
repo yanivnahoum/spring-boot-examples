@@ -37,6 +37,8 @@
         <logback.version>1.6.4</logback.version>
         <jackson-2-bom.version>2.21.7</jackson-2-bom.version>
         <jackson-bom.version>3.1.7</jackson-bom.version>
+        <!-- Overriding vulnerable version from Spring Cloud Azure 7.4.0 -->
+        <proton-j.version>0.35.0</proton-j.version>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +57,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Overriding vulnerable version from Spring Cloud Azure 7.4.0 -->
+            <dependency>
+                <groupId>org.apache.qpid</groupId>
+                <artifactId>proton-j</artifactId>
+                <version>${proton-j.version}</version>
             </dependency>
 
             <dependency>
