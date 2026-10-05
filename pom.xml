@@ -28,12 +28,12 @@
         <spring-ai.version>2.0.1</spring-ai.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <mockwebserver.version>5.5.0</mockwebserver.version>
-        <redisson.version>4.7.0</redisson.version>
+        <redisson.version>4.8.0</redisson.version>
         <testcontainers-redis.version>2.2.4</testcontainers-redis.version>
         <datasource-decorator.version>2.0.1</datasource-decorator.version>
-        <wiremock-spring-boot.version>4.2.2</wiremock-spring-boot.version>
+        <wiremock-spring-boot.version>4.4.2</wiremock-spring-boot.version>
         <!-- Overriding vulnerable version from Spring Boot 4.1.x -->
-        <tomcat.version>11.0.25</tomcat.version>
+        <tomcat.version>11.0.26</tomcat.version>
         <logback.version>1.6.4</logback.version>
         <jackson-2-bom.version>2.21.7</jackson-2-bom.version>
         <jackson-bom.version>3.1.7</jackson-bom.version>
