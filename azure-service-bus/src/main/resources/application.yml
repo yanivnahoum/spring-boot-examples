@@ -9,6 +9,13 @@ spring:
         namespace: some-namespace
         entity-name: some-queue
         entity-type: queue
+        retry:
+          mode: exponential
+          exponential:
+            base-delay: 800ms
+            max-delay: 1m
+            max-retries: 3
+          try-timeout: 10s
 
 management:
   endpoint:
