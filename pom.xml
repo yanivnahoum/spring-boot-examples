@@ -105,6 +105,7 @@
         <module>multiple-object-mappers</module>
         <module>azure-service-bus</module>
         <module>azure-event-hubs</module>
+        <module>azure-cosmos-db</module>
         <module>spring-task-execution-and-scheduling</module>
         <module>api-versioning</module>
         <module>spring-ai</module>
