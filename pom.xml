@@ -24,7 +24,7 @@
         </argLine>
         <flatten-maven-plugin.version>1.9.0</flatten-maven-plugin.version>
         <spring-cloud.version>2025.1.5</spring-cloud.version>
-        <spring-cloud-azure-dependencies.version>7.4.0</spring-cloud-azure-dependencies.version>
+        <spring-cloud-azure-dependencies.version>7.5.0</spring-cloud-azure-dependencies.version>
         <spring-ai.version>2.0.3</spring-ai.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <mockwebserver.version>5.5.1</mockwebserver.version>
@@ -33,9 +33,7 @@
         <datasource-decorator.version>2.0.1</datasource-decorator.version>
         <wiremock-spring-boot.version>4.4.3</wiremock-spring-boot.version>
         <!-- Overriding vulnerable version from Spring Boot 4.1.x -->
-        <logback.version>1.6.5</logback.version>
-        <!-- Overriding vulnerable version from Spring Cloud Azure 7.4.0 -->
-        <proton-j.version>0.35.0</proton-j.version>
+        <logback.version>1.6.6</logback.version>
     </properties>
 
     <dependencyManagement>
@@ -54,13 +52,6 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- Overriding vulnerable version from Spring Cloud Azure 7.4.0 -->
-            <dependency>
-                <groupId>org.apache.qpid</groupId>
-                <artifactId>proton-j</artifactId>
-                <version>${proton-j.version}</version>
             </dependency>
 
             <dependency>
