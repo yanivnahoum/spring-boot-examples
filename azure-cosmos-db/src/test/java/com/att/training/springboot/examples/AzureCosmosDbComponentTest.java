@@ -13,22 +13,17 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
-import org.testcontainers.containers.Container.ExecResult;
 import org.testcontainers.containers.CosmosDBEmulatorContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import tools.jackson.databind.json.JsonMapper;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,24 +54,12 @@ class AzureCosmosDbComponentTest {
 
     @SneakyThrows({ IOException.class, GeneralSecurityException.class })
     private static void configureTrustStore() {
-        String keyStorePassword = cosmos.getEmulatorKey();
-        KeyStore keyStore = buildKeyStore(keyStorePassword);
         Path keyStoreFile = tempFolder.resolve("azure-cosmos-emulator.p12");
+        KeyStore keyStore = cosmos.buildNewKeyStore();
+        String keyStorePassword = cosmos.getEmulatorKey();
         keyStore.store(new FileOutputStream(keyStoreFile.toFile()), keyStorePassword.toCharArray());
         System.setProperty("javax.net.ssl.trustStore", keyStoreFile.toString());
         System.setProperty("javax.net.ssl.trustStorePassword", keyStorePassword);
-    }
-
-    @SneakyThrows({ IOException.class, InterruptedException.class, GeneralSecurityException.class })
-    private static KeyStore buildKeyStore(String keyStorePassword) {
-        ExecResult execResult = cosmos.execInContainer("sh", "-c",
-                "openssl s_client -connect localhost:8081 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p'");
-        InputStream certificateStream = new ByteArrayInputStream(execResult.getStdout().getBytes());
-        Certificate certificate = CertificateFactory.getInstance("X.509").generateCertificate(certificateStream);
-        KeyStore keystore = KeyStore.getInstance("PKCS12");
-        keystore.load(null, keyStorePassword.toCharArray());
-        keystore.setCertificateEntry("azure-cosmos-emulator", certificate);
-        return keystore;
     }
 
     @BeforeEach
